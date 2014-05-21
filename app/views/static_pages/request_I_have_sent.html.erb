@@ -1,0 +1,100 @@
+<h1 class ="title">
+    Requests I have Sent 
+</h1>
+<%= form_for :request_I_have_sent, :url => { :method => :get, :action => :request_I_have_sent } do |f| %>
+<% if !@user.nil? %>
+<% @user.each do |u| %>
+<table align="center" width="100%" style=" margin-top: 30px; margin-bottom:30px">
+    <tr>
+        <% uzrname = User.find(u.RequestTo) %>
+        <td width="30%" style="background-color: #ccdbe0;" class="style1">
+                        <%= f.label(:username, uzrname.First_Name + " " + uzrname.Last_Name, :style => "color:blue;" ) %>
+        </td>
+        <td width="70%" style="background-color:#33b5e5;" >
+            <table style="color:white;">
+                <% @user_communication = Communication.where('"UserID" = ?',u.RequestTo) %>
+                <% @user_communication.each do |c| %>
+                <tr>
+                    <td>
+                        <%=  c.CommunicationMode  %>
+                    </td>
+                    <td>
+                        : &nbsp;<%= c.CommunicationDetail  %>
+                    </td>
+                </tr>
+                <% end %>
+            </table>
+            <hr>
+            <table style="color:white;">
+                <% user_availability = Availability.where('"UserID" = ?',u.RequestTo) %>
+                <% user_availability.each do |a| %>
+                <tr>
+                    <td>
+                        <%=  a.UserDays  %>
+                    </td>
+                    <td></td>
+                    <td>
+                        &nbsp;from <%=  a.TimeFrom  %>
+                    </td>
+                    <td></td>
+                    <td>
+                        &nbsp;to <%=  a.TimeTo  %>
+                    </td>
+                </tr>
+                <% end %>
+            </table>
+            <hr>
+            <table style="color:white;">
+                <% user_education = Education.where('"UserID" = ?', u.RequestTo) %>
+                <% user_education.each do |e| %>
+                <tr>
+                    <td>
+                        <%=  e.SchoolName  %>
+                    </td>
+                    <td></td>
+                    <td>
+                        &nbsp;Class of <%=  e.SchoolTo  %>
+                    </td>
+                </tr>
+                <% end %>
+            </table>
+            <hr>
+            <table style="color:white;">
+                <% user_profession = Profession.where('"UserID" = ?', u.RequestTo) %>
+                <% user_profession.each do |p| %>
+                <tr>
+                    <td>
+                        <%=  p.Designation  %>&nbsp;since 
+                    </td>
+                    <td></td>
+                    <td>
+                       &nbsp;<%=  p.Job_To  %>
+                    </td>
+                </tr>
+                <% end %>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <div class="button">
+                            <%= link_to "Cancel", reject_path(:id =>u.RequestTo), { method: :post, :class => "buttonblck" } %>
+                        </div> 
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<% end %>
+<% end %>
+<table width="100%" align="center" >
+<tr>
+        <td align="center">
+            <div style="background-color:#33b5e5;border-radius:15px; display:inline-block; color: white; font-family: Raleway; font-size:15px; padding:14px 30px; text-decoration: none;  text-align:center;">
+                    <%= link_to "Back", "/default", { :class => "buttonBack"} %>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<% end %>

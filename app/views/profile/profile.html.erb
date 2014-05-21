@@ -1,0 +1,131 @@
+<%= form_for :profile, :url => { :method => :get, :action => :profile } do |f| %>
+
+<table align="center" width="85%" style=" margin-top: 30px; margin-left:55px; margin-bottom:30px" >
+    <% if !@user.photo.url.blank? %>
+    <tr>
+        <td>
+            
+        </td>
+    </tr>
+    <% end %>
+
+    <tr>
+        <td width="40%" style="background-color: #FFFFFF;font-size: large" class="style1" ForeColor="Gray">
+        <%= image_tag @user.photo.url(:small),:alt => " " %><br/>
+        <%= @user.First_Name + " " + @user.Last_Name %>
+        
+        </td>
+        <td width="60%" style="background-color:#00BFFF;font-size: large">
+            <% @user_education.each do |user_edu| %>
+            
+            <table style="color:white;">
+                <tr>
+                    <td>
+	                    <%=  user_edu.SchoolName %>
+                    </td>
+                    <td>
+                        &nbsp;&nbsp;Class of <%= user_edu.SchoolFrom %>
+                    </td>
+                </tr>
+            </table>
+            
+            <% end %>
+        </td>
+    </tr>
+    <tr>
+        <td width="40%" style="background-color: #FFFFFF;font-size: large" class="style1">
+	        <% @user_communication.each do |user_com| %>
+            <table style="color:Gray;">
+                <tr>
+	                <td>
+	                	<%= user_com.CommunicationMode  %>
+	                </td>
+	                <td>
+	                	:&nbsp;<%=  user_com.CommunicationDetail  %>
+	                </td>
+                </tr>
+            </table>
+            
+            <% end %>
+        </td>
+        <td width="60%" style="background-color:#00BFFF;font-size: large">
+            <% @user_profession.each do |user_pro| %>
+            
+            <table style="color:white;">
+                <tr>
+                    <td>
+                    	<%= user_pro.Designation %>
+                    </td>
+                    
+                    <td>
+                    &nbsp;at&nbsp;&nbsp;<%= user_pro.Company %>
+                    </td>
+                </tr> 
+            </table>
+            
+            <% end %> 
+        </td>
+    </tr>
+    <tr>
+        <td width="40%" style="background-color: #FFFFFF;font-size: large" >
+            <% if !@user_availability.nil? %>
+            Availability
+            <% @user_availability.each do |user_avail| %>
+            <table width="100%" style="color:Gray;">
+                <tr>
+                    <td>
+                    	<%= user_avail.UserDays %>
+                    </td>
+                    <td align="right">
+                        <%= user_avail.TimeFrom+ " to" %>
+                    </td>
+                    <td>
+                        &nbsp;<%= user_avail.TimeTo %>
+                    </td>
+                </tr> 
+            </table>
+            <% end %>
+            <% end %>
+            <br/>
+            About:<br/>
+            <%=  @user.First_Name + " " + @user.Last_Name %>
+        </td>
+        <td width="60%" style="background-color:#00BFFF;font-size: large">
+            <table style="color:white;">
+                <tr>
+                    <td>
+                        <% if !@user.user_City.nil? %>
+                        <%= @user.user_City %>
+                        <% else %>
+                        
+                        <% end %>
+                    </td>
+                    <td>
+                        <% if !@user.user_State=="State" %>
+                        &nbsp;<%= @user.user_State %>
+                        <% else %>
+                        
+                        <% end %>
+                    </td>
+                    <td>
+                        <% if !@user.user_Zip.nil? %>
+                        &nbsp;<%=  @user.user_Zip %>
+                        <% else %>
+                        
+                        <% end %>
+                    </td>
+                </tr> 
+            </table>
+        </td>
+    </tr>
+</table>
+<table width="25%" align="center" style="margin-left:240px" >
+<tr>
+        <td>
+            <div class="button">
+                    <%= link_to "Back", "/default", { :class => "buttonBack"} %>
+            </div>
+        </td>
+    </tr>
+</table>
+<% end %>

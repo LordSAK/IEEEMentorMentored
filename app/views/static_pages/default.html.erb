@@ -1,0 +1,41 @@
+<table align="center" width="87%" style="margin-left40px;">
+<tr>
+  <td style="color: #212121" width="50%" align="center">
+    <div class="button" align="center">
+      <%= button_to "Search", '/searching', {method: :get, :class => "buttonhome",:style => "width:200px;height:80px"} %>
+    </div>
+  </td>
+  <td style="color: #212121;">
+ <div class="button">
+      <%= button_to "Pending Request", '/pendingrequest', { method: :get, :class => "buttonhome",:style => "width:200px;height:80px" } %>
+ </div>
+   </td>
+</tr>
+
+<tr>
+   <td style="color: #212121;">
+    <div class="button">
+      <%= button_to "Connections", '/connection', { method: :get, :class => "buttonhome",:style => "width:200px;height:80px" } %>
+ </div>
+    </td>
+   <td style="color: #212121;">
+    <div class="button">
+      <%= button_to "Profile", '/profile', { method: :get, :class => "buttonhome",:style => "width:200px;height:80px" } %>
+ </div>
+    </td>
+</tr>
+
+<tr>
+   <td style="color: #212121;">
+    <div class="button">
+      
+      <%= button_to "Settings", '/settings', {method: :get, :class => "buttonhome",:style => "width:200px;height:80px"} %>
+ </div>
+   </td>
+   <td style="color: #212121;">
+    <div class="button">
+      <%= button_to "Request I have Sent", '/sentrequest', { method: :get, :class => "buttonhome",:style => "width:200px;height:80px" } %>
+ </div>
+   </td>
+</tr>
+</table>

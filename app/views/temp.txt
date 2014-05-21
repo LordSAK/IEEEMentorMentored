@@ -1,0 +1,86 @@
+###################<!-- sign in networks -->#####################
+<table style="margin-left:100px;" width="80%" id="network">
+  <tr>
+    <td width="13%"></td>
+    <td align="right">
+      <label class="radio inline">
+        <%= f.radio_button(:SkillType, "Students",:id => "rb_SkillType") %>
+        Students
+      </label>
+    </td>
+    <td align="center">
+      <label class="radio inline">
+        <%= f.radio_button(:SkillType1, "Entrepreneurs",:id => "rb_SkillType1") %>
+        Entrepreneurs
+      </label>
+    </td>
+    <td align="left">
+      <label class="radio inline">
+        <%= f.radio_button(:SkillType2, "Veterans",:id => "rb_SkillType2") %>
+        Veterans
+      </label>
+    </td>
+    <td align="center" width="28%">
+      <label for="validation" id="errormessage2" visible="false" style="color:red;"></label> 
+    </td>
+  </tr>
+</table>
+#######################<!-- sign in networks -->#####################
+
+
+##################<!-- Signup Netowkrs -->#################
+<table align="center" width="100%" >
+    <tr>
+      <td>
+      </td>
+      <td>
+      </td>
+      <td width="40%" style="text-align:right;">
+        <label for="validation_all" id="errormessage2" visible="false" style="color:red;" ></label>
+      </td>
+    </tr>
+    <tr height="40px">
+      <td width="10%" >
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </td>
+      <td width="20%" align="left" style=" color: #212121;" >
+        <label class="checkbox inline" style="font-size:large" >
+          <%= f.check_box(:SkillType,{:id => "SkillType",:value => "Students"}) %>
+          Students
+        </label>
+      </td>
+      <td >
+          <%= f.select(:user_Need,options_from_collection_for_select(@students, "id", "student_mentor_subjects"), {},:id => "DDL_Students",:style => "margin-top: 10px") %>
+      </td>
+    </tr>
+    <tr height="40px">
+      <td>
+      </td>
+      <td>
+        <label class="checkbox inline" style="font-size:large" >
+          <%= f.check_box(:SkillType1,{:id => "SkillType1", :value =>"Entrepreneurs"} ) %>
+          Entrepreneurs
+        </label>
+      </td>
+      <td>
+        <%= f.select :SkillNeed1,options_from_collection_for_select(@entrepreneurs,"id", "entrepreneurs_mentor_subjects"),{},:id => "DDL_Entrepreneurs",:style => "margin-top: 10px" %>
+      </td>
+    </tr>
+      <!--  Business-->
+    <tr height="50px">
+      <td>
+      </td>
+      <td>
+        <label class="checkbox inline" style="font-size:large" >
+          <%= f.check_box(:SkillType2,{:id => "SkillType2",:value => "Veterans"}) %>
+          Veterans
+        </label>
+      </td>
+      <td>
+        <%= f.select :skillNeed2,options_from_collection_for_select(@veterans,"id","veteran_mentor_subjects"),{},:id => "DDL_Veterans",:style => "margin-top: 10px" %>
+      </td>
+      <!--   veterans-->
+      
+    </tr>
+  </table>
+  ###################<!-- Signup Netowkrs -->####################

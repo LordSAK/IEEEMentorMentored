@@ -1,0 +1,60 @@
+<table>
+      <tr>
+         <td align="center">
+            <h2 style="color:Black; font-size: x-large;">Specs</h2>               
+         <table>
+            <tr>
+               <td align="center">
+                  <%= text_field :Zip,placeholder: "Zip" %>
+               </td>
+            </tr>
+             <tr>
+               <td align="center">
+                 <select ID="DropDownList1" runat="server">
+                  <option Text="Interest" style = "width:135px;">Interest</option>
+                 </select>
+               </td>
+            </tr>
+             <tr>
+               <td align="center">
+                  <%= text_field :Designation,placeholder: "Designation" %>
+               </td>
+            </tr>
+             <tr>
+               <td align="center">
+                  <%= text_field :Company,placeholder: "Company" %>
+               </td>
+            </tr>
+         </table>
+         <table>
+            <tr>
+               <td>
+               	  <div class="button">
+               	      <%= button_to "Search", {}, { :class => "buttonSearch"} %>
+                  </div>
+               </td>
+            </tr>
+            <tr>
+               <td>
+               	  <div class="button">
+               	      <%= button_to "Back", '/default', { method: :get, :class => "buttonBack" } %>
+                  </div>
+               </td>
+            </tr>
+         </table>
+         </td>
+         <td align="center" class="cssResult" style="vertical-align:top;">
+            <h2 class="title" style="color:Black; font-size: x-large;">
+                    Result
+            </h2>
+            <table id="searchResult" width="100%" runat="server">
+            </table>
+         </td>
+         <td class="cssSuggestions" style="vertical-align:top; text-align:center;">
+            <h2 class="title" style="color:Black; font-size: x-large;">
+                    Suggestions
+            </h2>
+            <br />
+         </td>
+      </tr>
+</table>

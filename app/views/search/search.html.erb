@@ -1,0 +1,154 @@
+
+    <script type="text/javascript">
+        function WaterMarkSearch(tf_Zip, event) {
+            var defaultText = "Zip";
+
+            // Condition to check textbox length and event type
+            if (tf_Zip.value.length == 0 & event.type == "blur") {
+                //if condition true then setting text color and 
+                //default text in textbox
+                tf_Zip.style.color = "Gray";
+                tf_Zip.value = defaultText;
+            }
+            // Condition to check textbox value and event type
+            if (tf_Zip.value == defaultText & event.type == "focus") {
+                tf_Zip.style.color = "Gray";
+                tf_Zip.value = "";
+            }
+        }
+      </script>
+<%= form_for :search, :url => { :method => :get, :action => :search } do |f| %>
+<table width="100%" >
+      <tr>
+         <td align="center" style="vertical-align:top;" width="35%">
+            <h2 style="color:Black; font-size: x-large;">Specs</h2>               
+         <table>
+            <tr>
+               <td align="center">
+                <%= text_field_tag "tf_Zip",nil,:placeholder =>'Zip' %>
+               </td>
+            </tr>
+             <tr>
+               <td align="center">
+                  <% if current_user.SkillType== "1" %>
+                    <%= select_tag 'Interest', 
+                  options_from_collection_for_select(@students, :id, :student_mentor_subjects) %>
+                  <% elsif current_user.SkillType1=="1" %>
+                    <%= select_tag 'Interest', 
+                  options_from_collection_for_select(@students, :id, :entrepreneurs_mentor_subjects) %>
+                  <% elsif current_user.SkillType2=="1" %>
+                    <%= select_tag 'Interest', 
+                  options_from_collection_for_select(@students, :id, :veteran_mentor_subjects) %>
+                  <% end %>
+      
+                  
+               </td>
+            </tr>
+             <tr>
+               <td align="center">
+                <%= text_field_tag "tf_Designation",nil,:placeholder =>'Designation' %>
+
+               </td>
+            </tr>
+             <tr>
+                <td align="center">
+                  <%= text_field_tag "tf_Company",nil,:placeholder =>'Company' %>
+                </td>
+            </tr>
+         </table>
+         <table align="center" >
+            <tr>
+               <td align="center">
+               	  <div  style="width:45px;background-color:#33b5e5;
+  border-radius:15px;
+  display:inline-block;
+  color: white;
+  font-family: Raleway;
+  font-size:12px;
+  font-weight:bold;
+  padding:14px 30px;
+  text-decoration: none;
+    padding-botton:0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align:center;">
+                    <input type="submit" name="search" value="Search" class="buttonSearch">
+                  </div>
+               </td>
+               
+            </tr>
+            </table>
+            <table align="center">
+            <tr>
+               <td align="center">
+               	  <div  style="width:45px;background-color:#33b5e5;
+  border-radius:15px;
+  display:inline-block;
+  color: white;
+  font-family: Raleway;
+  font-size:12px;
+  font-weight:bold;
+  padding:14px 30px;
+  text-decoration: none;
+    padding-botton:0px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    text-align:center;">
+               	      <%= link_to "Back", "/default", { :class => "buttonBack"} %>
+                  </div>
+               
+            </tr>
+         </table>
+         </td>
+         <td align="center" style="vertical-align:top;" width="35%">
+            <h2 style="color:Black; font-size: x-large;">
+                    Result
+            </h2>
+
+            <table id="searchResult" width="100%" runat="server">
+              <% if !@user_img.photo.url.blank? %>
+    <tr>
+        <td>
+            
+        </td>
+    </tr>
+    <% end %>
+                    <% if !@user.nil? %>
+                        <% @user.each do |uzr| %>
+                          <tr>
+                              <td bgcolor="#CCDBE0" width="40%">
+                            <%= image_tag @user_img.photo.url(:small),:alt => " " %>
+                              <br/>
+                              <div><a style="color:blue;" href = 'profile?id=<%= uzr.id %>'><%= uzr.First_Name + " " + uzr.Last_Name %></a></div>
+                              </td>
+                              <td bgcolor="#CCDBE0" width="60%" style="text-align:center;">
+                              <div class='buttonblck1'><a href='searchings?id=<%= uzr.id %>'>Send Request </a></div>
+                              </td>
+                          </tr>
+                        <%  end %>
+                    <% end %>
+                    <% if !@user_join.nil? %>
+                        <% @user_join.each do |uzr_join| %>
+                          <tr>
+                              <td bgcolor="#CCDBE0" width="40%">
+                              
+                              <br/>
+                              <div><a style="color:blue;" href = 'profile?id=<%= uzr_join.UserID %>'><%= uzr_join.user.First_Name + " " + uzr_join.user.Last_Name %></a></div>
+                              </td>
+                              <td bgcolor="#CCDBE0" width="60%" style="text-align:center;">
+                              <div class='buttonblck1'><a href='searchings?id=<%= uzr_join.UserID %>'>Send Request </a></div>
+                              </td>
+                          </tr>
+                        <%  end %>
+                    <% end %>
+            </table>
+         </td>
+         <td style="vertical-align:top; text-align:center;" width="30%">
+            <h2 style="color:Black; font-size: x-large;">
+                    Suggestions
+            </h2>
+            <br />
+         </td>
+      </tr>
+</table>
+<% end %>

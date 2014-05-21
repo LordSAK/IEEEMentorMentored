@@ -1,0 +1,33 @@
+<h1 style="color:gray;" align="center">Password Reset</h1>
+<%= form_for @user, :url => password_reset_path(params[:id]) do |f| %>
+  <% if @user.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% for message in @user.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table width="100%">
+    <tr>
+      <td align="center">
+        <%= f.password_field :password, :placeholder => "New Password",:style => "text-align:center; Width:250px; ForeColor:Gray;" %>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <%= f.password_field :password_confirmation, :placeholder => "Re-enter Password",:style => "text-align:center; Width:250px; ForeColor:Gray;" %>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+    </tr>
+    <tr>
+      <td align="center"> 
+        <%= f.submit "Reset", :style => "width:100px; height:35px; color:white; background-color:Black; border-style: none; font-size:medium;" %>
+      </td>
+    </tr>
+  </table>
+<% end %>

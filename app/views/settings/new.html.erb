@@ -1,0 +1,808 @@
+<script src="/Scripts/jquery-1.4.1.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#btnAdd").click(function() {
+                var rownum=$("#controls > tbody > tr").length;
+            
+                var updated_row_num;
+                if (rownum == 0)
+                {
+                    updated_row_num=0;
+                }
+                else {
+                    updated_row_num=rownum/2;
+                }
+            
+                var field = $("#field").val();
+                var DDL_fromProfession = "<input type='text' name='ParametersFromProf["+ updated_row_num  +"]' style='width:50px' id='DDL_FromProYear' />";
+                var DDL_ToProfession = "<input type='text' name='ParametersToProf["+ updated_row_num +"]' style='width:50px' id='DDL_ToProYear' />";
+                var newRow1 = "<tr><td align='center' style='font-size: large; color: #212121;' >"
+                + DDL_fromProfession + " to " + DDL_ToProfession + "</td></tr>"
+                + "<tr><td align='center' style='font-size:large;color:#212121;' >"
+                newRow1 += "<button type='button' class='btn_rmv'>Remove</button></td></tr>";
+
+                var input = "<input name='parameters["+ updated_row_num +"]' id='field' type='text' style='width:100px' />";
+                var input1 = "<input name='parametersCompany["+ updated_row_num +"]' id='field' type='text' style='width:100px' />"
+                var newRow = "<tr><td align='center' style='font-size: large; color: #212121;' >"
+                + input + " at " + input1 + "</td></tr>";
+                $('#controls').append(newRow);
+                $('#controls').append(newRow1);
+
+            });
+
+            $('#controls').on('click', '.btn_rmv', function() {
+                var index = $(this).closest('tr').index() + 2
+                $('#controls tr:nth-child(n+' + (index - 3) + ')').remove();
+                return false;
+            });
+            
+        });
+    </script>
+<script type="text/javascript">
+        $(document).ready(function() {
+
+         $("#AddSch").click(function() {
+
+            var rownum=$("#ControlsSch > tbody > tr").length;
+            
+            var updated_row_num;
+            if (rownum == 0)
+            {
+                updated_row_num=0;
+            }
+            else {
+                updated_row_num=rownum/2;
+            }
+                var field = $("#field").val();
+                var DDL_fromProfession = "<input type='text' style='width:50px' name='ParametersFromSch["+ updated_row_num +"]' />";
+
+                var DDL_ToProfession = "<input type='text' style='width:50px' name='ParametersToSch["+ updated_row_num +"]' />";
+
+
+                var newRow1 = "<tr><td align='center' style='font-size: large; color: #212121;' >"
+                + DDL_fromProfession + " to " + DDL_ToProfession + "</td></tr>"
+                + "<tr><td align='center' style='font-size:large;color:#212121;' >"
+                newRow1 += "<input type='button' class='btn_rmvsch' value='Remove'/></td></tr>";
+
+
+                var input1 = "<input name='parametersSch["+ updated_row_num +"]' id='field' type='text' style='width:100px' />"
+                var newRow = "<tr><td align='center' style='font-size: x-large; color: #212121;' >" + input1 + "</td></tr>";
+                $('#ControlsSch').append(newRow);
+                $('#ControlsSch').append(newRow1);
+
+            });
+            $('#ControlsSch').on('click', '.btn_rmvsch', function() {
+                var index = $(this).closest('tr').index() + 2
+                $('#ControlsSch tr:nth-child(n+' + (index - 3) + ')').remove();
+                return false;
+            });
+            
+        });
+    </script>    
+<h1 class="title">
+    Settings
+</h1>
+<h2 class="subtitle">
+    Basic Information
+</h2>
+
+<%= form_for :settings, :url => {:action => :create}, :html=> {:multipart => true} do |f| %>
+
+<table align="center" width="100%">
+      <tr>
+         <td width="20%">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         </td>
+         
+            
+            <% if @user_basic.SkillType.to_s == "1" %>
+            <td align="left" style="vertical-align: bottom; color: #212121;" class="style6">
+                <label class="checkbox inline">
+                    <%= check_box_tag :Skilltype, @user_basic.id, true %>
+                    Students
+                </label>
+            </td>
+            <td>
+                <%= select_tag :user_Need,options_from_collection_for_select(@students, "id", "student_mentor_subjects",@user_basic.user_Need) ,:id => "DDL_Students" %>
+            </td>
+            <% else %>
+            <td>
+                <label class="checkbox inline">
+                    <%= check_box_tag :Skilltype, @user_basic.id, false %>
+                    Students
+                </label>
+            </td>
+            <td>
+                <%= select_tag :user_Need,options_from_collection_for_select(@students, "id", "student_mentor_subjects") ,:id => "DDL_Students" %>
+            </td>
+            <% end %>
+         
+        </tr>
+      <tr>
+         <td>
+         </td>
+         
+            <% if @user_basic.SkillType1.to_s == "1" %>
+            <td>
+                <label class="checkbox inline">
+                    <%= check_box_tag 'Skilltype1', @user_basic.id,true %>
+                    Entrepreneurs
+                </label>
+            </td>
+            <td>
+                <%= select_tag :SkillNeed1,options_from_collection_for_select(@entrepreneurs, "id", "entrepreneurs_mentor_subjects",@user_basic.SkillNeed1) ,:id => "DDL_Entrepreneurs" %>
+            </td>
+            <% else %>
+            <td>
+                <label class="checkbox inline">
+                    <%= check_box_tag 'Skilltype1', @user_basic.id, false %>
+                    Entrepreneurs
+                </label>
+            </td>
+            <td>
+                <%= select_tag :SkillNeed1,options_from_collection_for_select(@entrepreneurs, "id", "entrepreneurs_mentor_subjects") ,:id => "DDL_Entrepreneurs" %>
+            </td>
+            <% end %>
+       
+      </tr>
+      <tr>
+         <td>
+         </td>
+         
+            <% if @user_basic.SkillType2.to_s == "1" %>
+            <td>
+                <label class="checkbox inline">
+                    <%= check_box_tag 'Skilltype2', @user_basic.id, true %>
+                    Veterans
+                </label>
+            </td>
+            <td>
+                <%= select_tag :SkillNeed2,options_from_collection_for_select(@veterans, "id", "veteran_mentor_subjects",@user_basic.SkillNeed1) ,:id => "DDL_Veterans" %>
+            </td>
+            <% else %>
+            <td>
+                <label class="checkbox inline">
+                    <%= check_box_tag 'Skilltype2', @user_basic.id, false %>
+                    Veterans
+                </label>
+            </td>
+            <td>
+                <%= select_tag :SkillNeed2,options_from_collection_for_select(@veterans, "id", "veteran_mentor_subjects") ,:id => "DDL_Veterans" %>
+            </td>
+            <% end %>
+         </td>
+           
+      </tr>
+</table>
+
+<h2 class="subtitle"> 
+    Personal Information
+</h2>
+<table align="center" width="90%" style="margin-left: 35px">
+      <tr>
+         <td style="vertical-align:top;">
+            <table id="Professions" align="center">
+                  <tr>
+                     <td id="Professions" align="center">
+                        Profession
+                     </td>
+                  </tr>
+                    <tr>
+                        <td align="center">
+                            <% @user_profession.each_with_index do |user_prof,i| %>
+                            <table id="Profession_controls" cellpadding="10" cellspacing ="10"> 
+                                        <script type="text/javascript">
+                                var rownum=$("Profession_controls > tbody > tr").length;
+                                //alert(rownum);
+                                var updated_row_num;
+                                if (rownum == 0)
+                                {
+                                  updated_row_num=0;
+                                }
+                                else {
+                                  updated_row_num=rownum/2;
+                                }
+                                </script>
+                                <tr>
+                                   <td>
+                                      <input type="text" name="tf_designation[<%= i %>" value="<%=  user_prof.Designation %>" style="width:100px">
+                                      at
+                                      <input type="text" name="tf_company[<%= i %>]" value="<%= user_prof.Company %>" style="width:100px"><br/>
+                                   </td>
+                                </tr>
+                                <tr>
+                                   <td align="center">
+                                      <input type="text" name="tf_fromdesignation[<%= i %>]" value="<%= user_prof.Job_From %>" style="width:50px;">
+                                      to
+                                      <input type="text" name="tf_todesignation[<%= i %>]" value="<%= user_prof.Job_To %>" style="width:50px;"> <br/>
+                                   </td>
+                                </tr>
+                                
+                            </table>
+                            <% end %>
+                            <table id="controls" cellpadding="10" cellspacing="10">
+                            </table>
+                            <input id="btnAdd" type="button" value="Add" />
+                        </td>
+                    </tr>
+            </table>
+         </td>
+         <td style="vertical-align:top;">
+            <table id="Schools" align="center" valign="top">
+                  <tr>
+                     <td id="Schools" align="center">
+                        Education
+                     </td>
+                  </tr>
+                  <tr>
+                        <td align="center">
+                            <% @user_education.each_with_index do |user_ed,i| %>
+                            <table id="SchoolControls" cellpadding="10" cellspacing="10">
+                                <script type="text/javascript">
+                                var rownum=$("SchoolControls > tbody > tr").length;
+                                
+                                var updated_row_num;
+                                if (rownum == 0)
+                                {
+                                  updated_row_num=0;
+                                }
+                                else {
+                                  updated_row_num=rownum/2;
+                                }
+                                //alert(updated_row_num);
+                                </script>
+                                  <tr> 
+                                     <td align="center">
+                                        <input type="text" name="tf_education[<%= i %>]" value="<%= user_ed.SchoolName %>" style="width:100px"><br/>
+                                     </td>
+                                  </tr>
+                                  <tr>
+                                     <td align="center">
+                                <input type="text" name="tf_fromeducation[<%= i %>]" value="<%= user_ed.SchoolFrom %>" style="width:50px;">
+                                to
+                                <input type="text" name="tf_toeducation[<%= i %>]" value="<%= user_ed.SchoolTo %>" style="width:50px;"><br/>
+                                    </td>
+                                  </tr>
+                                  
+                            </table>
+                            <% end %>
+                            <table id="ControlsSch" cellpadding="10" cellspacing="10">
+                            </table>
+                            <input id="AddSch" type="button" value="Add" />
+                        </td>
+                    </tr>
+            </table>
+         </td>
+      </tr>
+</table>
+<h2 class="subtitle">
+    Contact Information
+</h2>
+<div align="center" width="100%">
+
+    <% ph=0 %>
+    <% em=0 %>
+    <% wbs=0 %>
+    <% twtr=0 %>
+    <% skyp=0 %>
+
+       <table>
+        <% if @user_communication.blank? %>
+            <tr style="text-align: left; vertical-align: middle;">
+                <td style="font-size: large; color: #212121;">
+                    Phone:
+                </td>
+                <td style="font-size: large; color: #212121;">
+                    <%= text_field_tag :tf_phone %>
+                </td>
+            </tr>
+            <tr style="text-align: left; vertical-align: middle;">
+                <td style="font-size: large; color: #212121;">
+                    Email:
+                </td>
+                <td style="font-size: large; color: #212121;">
+                    <%= text_field_tag :tf_email %>
+                </td>
+            </tr>
+            <tr style="text-align: left; vertical-align: middle;">
+                <td style="font-size: large; color: #212121;">
+                    Skype:
+                </td>
+                <td style="font-size: large; color: #212121;">
+                    <%= text_field_tag :tf_skype %>
+                </td>
+            </tr>
+            <tr style="text-align: left; vertical-align: middle;">
+                <td style="font-size: large; color: #212121;">
+                    Website:
+                </td>
+                <td style="font-size: large; color: #212121;">
+                    <%= text_field_tag :tf_website %>
+                </td>
+            </tr>
+            <tr style="text-align: left; vertical-align: middle;">
+                <td style="font-size: large; color: #212121;">
+                    Twitter:
+                </td>
+                <td style="font-size: large; color: #212121;">
+                    <%= text_field_tag :tf_twitter %>
+                </td>
+            </tr>
+        <%else %>
+            <% @user_communication.each do |user_com| %>
+                <% if user_com.CommunicationMode.to_s == "Phone" %>
+                <tr style="text-align: left; vertical-align: middle;">
+                    <% ph=1 %>
+                    <td style="font-size: large; color: #212121;">
+                        Phone:
+                    </td>
+                    <td style="font-size: large; color: #212121;">
+                        <%= text_field_tag :tf_phone, user_com.CommunicationDetail %>
+                    </td>
+                </tr>
+                <% end %>
+                <% if user_com.CommunicationMode.to_s == "Email" %>
+                <tr style="text-align: left; vertical-align: middle;">
+                    <% em=1 %>
+                    <td style="font-size: large; color: #212121;">
+                        Email:
+                    </td>
+                    <td style="font-size: large; color: #212121;">
+                        <%= text_field_tag :tf_email, user_com.CommunicationDetail %>
+                    </td>
+                </tr>
+                <% end %>
+                
+                
+                <% if user_com.CommunicationMode.to_s == "Skype" %>
+                <tr style="text-align: left; vertical-align: middle;">
+                    <% skyp =1 %>
+                    <td style="font-size: large; color: #212121;">
+                        Skype:
+                    </td>
+                    <td style="font-size: large; color: #212121;">
+                        <%= text_field_tag :tf_skype, user_com.CommunicationDetail %>
+                    </td>
+                </tr>
+                <% end %>
+                
+                
+                <% if user_com.CommunicationMode.to_s == "Website" %>
+                <tr style="text-align: left; vertical-align: middle;">
+                <% wbs=1 %>
+                    <td style="font-size: large; color: #212121;">
+                        Website:
+                    </td>
+                    <td style="font-size: large; color: #212121;">
+                        <%= text_field_tag :tf_website, user_com.CommunicationDetail %>
+                    </td>
+                
+                </tr>
+                <% end %>
+                
+                <% if user_com.CommunicationMode.to_s == "Twitter" %>
+                <tr style="text-align: left; vertical-align: middle;">
+                    <% twtr =1 %>
+                    <td style="font-size: large; color: #212121;">
+                        Twitter:
+                    </td>
+                    <td style="font-size: large; color: #212121;">
+                        <%= text_field_tag :tf_twitter, user_com.CommunicationDetail%>
+                    </td>
+                
+                </tr>
+                <% end %>
+            <% end %>
+            <% if ph==0 %>
+            <tr style="text-align: left; vertical-align: middle;">
+                <td style="font-size: large; color: #212121;">
+                    Phone:
+                </td>
+                <td style="font-size: large; color: #212121;">
+                    <%= text_field_tag :tf_phone %>
+                </td>
+            </tr>
+            <% end %>
+            <% if em ==0 %>
+                <tr style="text-align: left; vertical-align: middle;">
+                <td style="font-size: large; color: #212121;">
+                    Email:
+                </td>
+                <td style="font-size: large; color: #212121;">
+                    <%= text_field_tag :tf_email %>
+                </td>
+            </tr>
+            <% end %>
+            <% if skyp ==0 %>
+                <tr style="text-align: left; vertical-align: middle;">
+                <td style="font-size: large; color: #212121;">
+                    Skype:
+                </td>
+                <td style="font-size: large; color: #212121;">
+                    <%= text_field_tag :tf_skype %>
+                </td>
+                </tr>
+            <% end %>
+            <% if wbs ==0 %>
+                <tr style="text-align: left; vertical-align: middle;">
+                <td style="font-size: large; color: #212121;">
+                    Website:
+                </td>
+                <td style="font-size: large; color: #212121;">
+                    <%= text_field_tag :tf_website %>
+                </td>
+                </tr>
+            <% end %>
+            <%if twtr==0 %>
+                <tr style="text-align: left; vertical-align: middle;">
+                <td style="font-size: large; color: #212121;">
+                    Twitter:
+                </td>
+                <td style="font-size: large; color: #212121;">
+                    <%= text_field_tag :tf_twitter %>
+                </td>
+                </tr>
+            <% end %>
+        <% end %>
+    </table>
+</div>
+<h2 class="subtitle">
+    Profile Images 
+</h2>
+<table align="center" width="110%">
+        <tr>
+            <td align="center">
+            <%= f.file_field :photo %>
+        </td>
+        </tr>
+</table>
+<h2 class="subtitle">
+    Advanced
+</h2>
+<table align="center" width="100%">
+      <tr>
+         <td align="center" width="34%" style="font-size: x-large; color: Gray;">
+            Password
+         </td>
+         <td align="center" width="33%" style="font-size: x-large; color: Gray;">
+            Privacy
+         </td>
+         <td align="center" width="33%" style="font-size: x-large; color: Gray;" height="60px">
+            Delete Account
+         </td>
+      </tr>
+      <tr>
+         <td style="vertical-align:top;">
+            <table align="center" width="73%">
+                <tr>
+                    <td style="text-align:right;">
+                        <div class="button">
+                            <a id="ResetPass" class="buttonSearch">Reset</a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+         </td>
+         <td>
+            <%= label(:label2, "Show these details in search result", {}, { :class => "labelTo" }) %>
+            <br />
+            <table>
+                <tr>
+                    <td>
+                        <label class="checkbox inline">
+                            <%= check_box(:ChkBx_Location,{:id => "ChkBx_Location",:value => "Location"}) %>
+                            Location
+                        </label>
+                    </td>
+                </tr>
+            </table>
+            <table >
+                <% if @user_profession.blank? %>
+                    <tr>
+                        <td>
+                            <label class="checkbox inline">
+                                <%= check_box_tag 'ChkBx_Profession' %>
+                                Profession
+                            </label>
+                        </td>
+                    </tr>
+                <% else %>
+                    
+                        <tr> 
+                            <td>
+                            <% if !@user_profession.first.Designation.blank? and @user_profession.first.Private.to_s == "1" %>
+                                <label class="checkbox inline">
+                                    <input type="checkbox" name="ChkBx_Profession" id="ChkBx_Profession" value="1" checked = "checked">
+                                    Profession
+                                </label>
+                            <% elsif !@user_profession.first.Designation.blank? and @user_profession.first.Private.to_s == "0" %>
+                                <label class="checkbox inline">
+                                    <%= check_box_tag 'ChkBx_Profession' %>
+                                    Profession
+                                </label>
+                             <% end %>
+                            </td>
+                        </tr>
+                    
+                <% end %>
+            </table>
+            <table >
+                <% if @user_education.blank? %>
+                    <tr>
+                        <td>
+                            <label class="checkbox inline">
+                                <%= check_box_tag 'ChkBx_Education' %>
+                                Education
+                            </label>
+                        </td>
+                    </tr>
+                <% else %>
+                    
+                        <tr>
+                            <td>
+                            <% if !@user_education.first.SchoolName.blank? and @user_education.first.Private.to_s == "1" %>
+                                <label class="checkbox inline">
+                                    <input type="checkbox" name="ChkBx_Education"
+                                    id="ChkBx_Education" value="1" checked = "checked">
+                                    Education
+                                </label>
+                            <% elsif !@user_education.first.SchoolName.blank? and @user_education.first.Private.to_s == "0" %>
+                                <label class="checkbox inline">
+                                    <%= check_box_tag 'ChkBx_Education' %>
+                                    Education
+                                </label>
+                            <% end %>
+                            </td>
+                        </tr>
+                    
+                <% end %>
+            </table>
+            <table>
+                <% phone = 0 %>
+                <% email = 0 %>
+                <% skype = 0 %>
+                <% website = 0 %>
+                <% twitter = 0 %>
+                <% @user_communication.each do |c| %>
+                    <% if c.CommunicationMode == "Phone" and c.Private.to_s == "1" %>
+                <tr>
+                    <% phone = 1 %>
+                    <td>
+                        <label class="checkbox inline">
+                            <input type="checkbox" name="ChkBx_Phone" id="ChkBx_Phone" value="1" checked = "checked">
+                            Phone
+                        </label>
+                    </td>
+                </tr>
+                     <% end %>
+                     <% if c.CommunicationMode == "Email" and c.Private.to_s == "1" %>
+                <tr>
+                    <% email = 1 %>
+                    <td>
+                        <label class="checkbox inline">
+                            <input type="checkbox" name="ChkBx_Email" id="ChkBx_Email" value="1" checked = "checked">
+                            Email
+                        </label>
+                    </td>
+                </tr>
+                    <% end %>
+                    <% if c.CommunicationMode == "Skype" and c.Private.to_s == "1" %>
+                <tr>
+                    <% skype = 1 %>
+                    <td>
+                        <label class="checkbox inline">
+                            <input type="checkbox" name="ChkBx_Skype" id="ChkBx_Skype" value="1" checked = "checked">
+                            Skype
+                        </label>
+                    </td>
+                </tr>
+                    <% end %>
+                    <% if c.CommunicationMode == "Website" and c.Private.to_s == "1" %>
+                <tr>
+                    <% website = 1 %>
+                    <td>
+                        <label class="checkbox inline">
+                            <input type="checkbox" name="ChkBx_Website" id="ChkBx_Website" value="1" checked = "checked">
+                            Website
+                        </label>
+                    </td>
+                </tr>
+                    <% end %>
+                    <% if c.CommunicationMode == "Twitter" and c.Private.to_s == "1" %>
+                    <tr>
+                        <% twitter = 1 %>
+                        <td>
+                            <label class="checkbox inline">
+                                <input type="checkbox" name="ChkBx_Twitter" id="ChkBx_Twitter" value="1" checked = "checked">
+                                Twitter
+                            </label>
+                        </td>
+                    </tr>
+                    <% end %>
+                    <% end %>
+                    <% if phone == 0 %>
+                    <tr>
+                        <td>
+                            <label class="checkbox inline">
+                                <%= check_box_tag 'ChkBx_Phone' %>
+                                Phone
+                            </label>
+                        </td>
+                    </tr>
+                    <% end %>
+                    <% if email == 0 %>
+                    <tr>
+                        <td>
+                            <label class="checkbox inline">
+                                <%= check_box_tag 'ChkBx_Email' %>
+                                Email
+                            </label>
+                        </td>
+                    </tr>
+                    <% end %>
+                    <% if skype == 0 %>
+                    <tr>
+                        <td>
+                            <label class="checkbox inline">
+                                <%= check_box_tag 'ChkBx_Skype' %>
+                                <%= label(:lb_Skype, "Skype") %>
+                            </label>
+                        </td>
+                    </tr>
+                    <% end %>
+                    <% if website == 0 %>
+                    <tr>
+                        <td>
+                            <label class="checkbox inline">
+                                <%= check_box_tag 'ChkBx_Website' %>
+                                Website
+                            </label>
+                        </td>
+                    </tr>
+                    <% end %>
+                    <% if twitter == 0 %>
+                    <tr>
+                        <td>
+                            <label class="checkbox inline">
+                                <%= check_box_tag 'ChkBx_Twitter' %>
+                                Twitter
+                            </label>
+                        </td>
+                    </tr>
+                    <% end %>
+            </table>
+         </td>
+         <td style="vertical-align:top;">
+            <div align="left">
+                <%= label(:label1, "Are you sure you want to delete your account? If you're having any specific problems. Just ", {}, { :class => "labelTo" }) %>
+                    <a href="#" style="color: #33b5e5;" onclick="document.location = 'mailto:help@mentormentored.org'; return false;">
+                    Let me know</a>
+            </div>
+        <table align="center" width="75%">
+            <tr>
+                <td style="text-align:left;">    
+                    <div class="button">
+                        <a id="DeleteMyAccount" class="buttonSearch">Delete Account</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        </td>
+    </tr>
+</table>
+   <table width="80%">
+        <tr>
+            <td style="font-size: x-large; color: #212121; margin-right:10px;text-align:center;" height="35px;">
+                <div class="button" style="">
+                    <input type="submit" class = "buttonSearch" value= 'Update'>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: x-large; color: #212121; text-align:center;" height="35px;">
+                <div class="button">
+                    <%= link_to "Back", "/default", { :class => "buttonBack"} %>
+                    
+                </div>
+            </td>
+        </tr>
+    </table>
+<% end %>
+            <script type="text/javascript">
+                var el=document.getElementById("ResetPass");
+                el.onclick = show_dialog2;
+                function show_dialog2() {
+                $( "#dialog" ).dialog();
+
+                }
+            </script>
+
+<div id="dialog" title="Reset Password" hidden="true">
+                <%= form_tag({ controller: "settings", action: "reset_password"}) do |f| %>
+                    <table align="center" width="100%" style="text-align:center; vertical-align:top;">
+                        <tr>
+                            <td align="center">
+                                
+                                    <%= label_tag(:currentpassword,"Current Password") %>
+                                    <%= password_field_tag 'tf_currentpassword' %>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <%= label_tag(:newpassword, "New Password") %>
+                                    <%= password_field_tag 'tf_newpassword' %>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div>
+                                    <%= label_tag(:re_enterpassword, "Re-enter Password") %>
+                                    <%= password_field_tag 'tf_re_enterpassword'  %>
+                                </div>
+                            </td>
+                        </tr> 
+                    </table>
+                    <table align="center" width="63%">
+                        <tr>
+                            <td style="text-align:right;">
+                                <%= submit_tag 'Submit', :id => "_button" %>
+                            </td>
+                        </tr>
+                    </table>
+                <% end %>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+    // '_button' is the Id of your submit button
+    $("#_button").click(function() {            
+      $(this).closest("form").submit();
+      $("#dialog").dialog("close");
+    });
+});
+</script>
+
+
+            <script type="text/javascript">
+                var e2=document.getElementById("DeleteMyAccount");
+                e2.onclick = show_dialog3;
+                function show_dialog3() {
+                $( "#dialog2" ).dialog();
+                }
+            </script>
+<div id="dialog2" title="Delete My Account" hidden="true">
+                <%= form_tag({ controller: "settings", action: "delete_my_account"}) do |f| %>
+                    <table width="100%" align="center" style="text-align:center; vertical-align:top;">
+                        <tr>
+                            <td>
+                                <div>
+                                    <%= label_tag(:password, "Password") %>
+                                    <%= password_field_tag 'tf_password' %>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <table align="center" width="63%">
+                        <tr>
+                            <td style="text-align:right;">
+                                <%= submit_tag 'Submit', :id => "_button1" %>
+                            </td>
+                        </tr>
+                    </table>
+                <% end %>
+</div>                       
+
+<script type="text/javascript">
+$(document).ready(function() {
+    // '_button' is the Id of your submit button
+    $("#_button1").click(function() {            
+      $(this).closest("form").submit();
+      $("#dialog2").dialog("close");
+    });
+});
+</script>
+

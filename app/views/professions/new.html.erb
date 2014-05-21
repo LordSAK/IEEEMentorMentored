@@ -1,0 +1,163 @@
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+     <script type="text/javascript">
+       
+     $(document).ready(function() {
+         
+     //$("input[value='Add']").click(function(e)
+     $("#btnAdd").click(function()
+     {
+          //e.preventDefault();
+         var hidval = $('#valPro').val();
+         if(hidval == '0')
+         {
+           hidval = 1;
+         }
+         else
+         {
+           hidval++;
+         }
+         
+         //alert(hidval);
+
+            var rownum=$("#Controls > tbody > tr").length;
+            //alert(rownum);
+            var updated_row_num;
+            if (rownum == 0)
+            {
+                updated_row_num=0;
+            }
+            else {
+                updated_row_num=rownum/2;
+            }
+    // var field = $("#field").val();
+     var year = new Date().getFullYear();
+     
+
+      var DDL_fromProfession = "<select name='ParametersFromProf["+ updated_row_num +"]' id='DDL_FromProYear' class='input-small'>";
+                for (var i = year; i >= 1950; --i) {
+                    DDL_fromProfession += "<option text='" + i + "' value='" + i + "'>" + i + "</option>";
+                }
+                DDL_fromProfession += "</select>";
+
+                var DDL_ToProfession = "<select name='ParametersToProf["+ updated_row_num +"]'  id='DDL_ToProYear' class='input-small'>";
+                for (var j = year; j >= 1950; --j) {
+                    if (j != year) {
+                        DDL_ToProfession += "<option text='" + j + "' value='" + j + "'>" + j + "</option>";
+                    }
+                    else {
+                        DDL_ToProfession += "<option text='Present' value='Present'>Present</option>";
+
+                    }
+                }
+                DDL_ToProfession += "</select>";
+
+      var input = "<input name='parameters["+ updated_row_num +"]' id='field' type='text' placeholder='Designation' style='text-align:center;' onblur='WaterMarkDesignation(this, event);' onfocus='WaterMarkDesignation(this, event);'/>";
+                var input1 = "<input name='parametersCompany["+ updated_row_num +"]' id='field' type='text' placeholder='Company' style='text-align:center;' onblur='WaterMarkCompany(this, event);' onfocus='WaterMarkCompany(this, event);'/>"
+
+
+
+                var newRow = "<tr><td align='center' style='font-size: x-large; color: #212121;' height='35px'>"
+    + input + " at " + input1 + "</td></tr>";
+               
+               
+
+     
+var controls = "<tr><td align='center'>"+ DDL_fromProfession + " To "+DDL_ToProfession+ "</td></tr>";
+var control = "<tr><td align='center'><button type='button' class='btn_rmv'>Remove</button></td></tr>";
+     $('#Controls').append(newRow);
+     $('#Controls').append(controls);
+     $('#Controls').append(control);
+     $('#valPro').val(hidval);
+     return false;
+  });
+
+            $('#Controls').on('click', '.btn_rmv', function() {
+              //alert("ali");
+                var index = $(this).closest('tr').index() + 2
+                $('#Controls tr:nth-child(n+' + (index - 3) + ')').remove();
+                return false;
+            });
+
+ });
+
+
+</script> 
+
+    <script type="text/javascript">
+                        function WaterMarkDesignation(TxtBxDesignation, event) {
+
+                            var defaultText = "Designation";
+                            // Condition to check textbox length and event type
+                            if (TxtBxDesignation.value.length == 0 & event.type == "blur") {
+                                //if condition true then setting text color 
+                                //and default text in textbox
+                                TxtBxDesignation.style.color = "black";
+                                TxtBxDesignation.value = defaultText;
+                            }
+                            // Condition to check textbox value and event type
+                            if (TxtBxDesignation.value == defaultText & event.type == "focus") {
+                                TxtBxDesignation.style.color = "black";
+                                TxtBxDesignation.value = "";
+                            }
+                        }
+
+                        function WaterMarkCompany(TxtBxCompany, event) {
+
+                            var defaultText = "Company";
+                            // Condition to check textbox length and event type
+                            if (TxtBxCompany.value.length == 0 & event.type == "blur") {
+                                //if condition true then setting text color 
+                                //and default text in textbox
+                                TxtBxCompany.style.color = "black";
+                                TxtBxCompany.value = defaultText;
+                            }
+                            // Condition to check textbox value and event type
+                            if (TxtBxCompany.value == defaultText & event.type == "focus") {
+                                TxtBxCompany.style.color = "black";
+                                TxtBxCompany.value = "";
+                            }
+                        }
+                        </script>
+
+<h2 class="subtitle">
+   Profession
+</h2>
+<%= form_for(:Professions) do |f| %>
+<table width = "100%">
+      <tr style = "text-align:center;">
+         <td>
+			<%= f.text_field :tf_Designation, placeholder: "Designation", :style => "text-align:center;" %>
+			at
+			<%= f.text_field :tf_Company, placeholder: "Company", :style => "text-align:center;" %>
+         </td>
+      </tr>
+      <tr style = "text-align:center;">
+         <td  style="margin-right:60px;">
+            
+            <%= f.select(:fromyear, options_for_select((1950..Time.now.year).to_a.reverse), {:include_blank => 'Select year'}, { :class => 'input-medium' }) %>
+            To
+            <%= f.select(:toyear, options_for_select((1995..Time.now.year-1).to_a.reverse.unshift('Present')), {:include_blank => "Select year"},{:class=>"input-medium"}) %>
+         </td>
+      </tr>
+      <tr>
+         <td align="center">
+            <table id="Controls">
+            </table>
+            <table id="Controlsbtn_remove">
+            </table>
+            <div><input id="btnAdd" value="Add" type="submit" /></div>
+            <input id="valPro" name="valPro" type="hidden" value="0" />
+            
+         </td>
+      </tr>
+</table>
+<table width="92%">
+  <tr>
+       <td align="center">
+         	<div class="button" style="margin-left:60px;">
+                <%= f.submit "Next", { :class => "buttonSearch"} %>
+            </div>
+         </td>
+      </tr>
+</table>
+<% end %> 
