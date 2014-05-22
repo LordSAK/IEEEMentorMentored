@@ -89,92 +89,89 @@
 
 <%= form_for :settings, :url => {:action => :create}, :html=> {:multipart => true} do |f| %>
 
-<table align="center" width="100%">
-      <tr>
-         <td width="20%">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         </td>
-         
-            
-            <% if @user_basic.SkillType.to_s == "1" %>
-            <td align="left" style="vertical-align: bottom; color: #212121;" class="style6">
-                <label class="checkbox inline">
-                    <%= check_box_tag :Skilltype, @user_basic.id, true %>
-                    Students
-                </label>
-            </td>
-            <td>
-                <%= select_tag :user_Need,options_from_collection_for_select(@students, "id", "student_mentor_subjects",@user_basic.user_Need) ,:id => "DDL_Students" %>
-            </td>
+    <div align="center" width="100%">
+        <table >
+            <% if @user_basic.interest.blank? %>
+                <tr style="text-align: left; vertical-align: middle;">
+                    <td style="font-size: large; color: #212121;">
+                        Interest Area
+                    </td>
+                    <td style="font-size: large; color: #212121;">
+                        <%= f.select(:interest,options_from_collection_for_select(@InterestAreas, "id", "InterestArea"), {},:id => "DDL_Students",:style => "margin-top: 10px") %>
+                    </td>
+                </tr>
             <% else %>
-            <td>
-                <label class="checkbox inline">
-                    <%= check_box_tag :Skilltype, @user_basic.id, false %>
-                    Students
-                </label>
-            </td>
-            <td>
-                <%= select_tag :user_Need,options_from_collection_for_select(@students, "id", "student_mentor_subjects") ,:id => "DDL_Students" %>
-            </td>
+               <tr style="text-align: left; vertical-align: middle;">
+                    <td style="font-size: large; color: #212121;">
+                        Interest Area1
+                    </td>
+                    <td style="font-size: large; color: #212121;">
+                        <%= f.select(:interest,options_from_collection_for_select(@InterestAreas, "id", "InterestArea",@user_basic.interest), {},:id => "DDL_Students",:style => "margin-top: 10px") %>
+                    </td>
+                </tr>
             <% end %>
-         
-        </tr>
-      <tr>
-         <td>
-         </td>
-         
-            <% if @user_basic.SkillType1.to_s == "1" %>
-            <td>
-                <label class="checkbox inline">
-                    <%= check_box_tag 'Skilltype1', @user_basic.id,true %>
-                    Entrepreneurs
-                </label>
-            </td>
-            <td>
-                <%= select_tag :SkillNeed1,options_from_collection_for_select(@entrepreneurs, "id", "entrepreneurs_mentor_subjects",@user_basic.SkillNeed1) ,:id => "DDL_Entrepreneurs" %>
-            </td>
+
+            <% if @user_basic.societies.blank? %>
+                <tr style="text-align: left; vertical-align: middle;">
+                    <td style="font-size: large; color: #212121;">
+                        IEEE Societies
+                    </td>
+                    <td style="font-size: large; color: #212121;">
+                        <%= f.select(:societies,options_from_collection_for_select(@Societies, "id", "IEEESocieties"),:id => "DDL_Students",:style => "margin-top: 10px") %>
+                    </td>
+                </tr>
             <% else %>
-            <td>
-                <label class="checkbox inline">
-                    <%= check_box_tag 'Skilltype1', @user_basic.id, false %>
-                    Entrepreneurs
-                </label>
-            </td>
-            <td>
-                <%= select_tag :SkillNeed1,options_from_collection_for_select(@entrepreneurs, "id", "entrepreneurs_mentor_subjects") ,:id => "DDL_Entrepreneurs" %>
-            </td>
+                <tr style="text-align: left; vertical-align: middle;">
+                    <td style="font-size: large; color: #212121;">
+                        IEEE Societies
+                    </td>
+                    <td >
+                        <%= f.select(:societies,options_from_collection_for_select(@Societies, "id", "IEEESocieties", @user_basic.societies), {},:id => "DDL_Students",:style => "margin-top: 10px") %>
+                    </td>
+                </tr>
             <% end %>
-       
-      </tr>
-      <tr>
-         <td>
-         </td>
-         
-            <% if @user_basic.SkillType2.to_s == "1" %>
-            <td>
-                <label class="checkbox inline">
-                    <%= check_box_tag 'Skilltype2', @user_basic.id, true %>
-                    Veterans
-                </label>
-            </td>
-            <td>
-                <%= select_tag :SkillNeed2,options_from_collection_for_select(@veterans, "id", "veteran_mentor_subjects",@user_basic.SkillNeed1) ,:id => "DDL_Veterans" %>
-            </td>
+    
+            <% if @user_basic.sector.blank? %>
+                <tr style="text-align: left; vertical-align: middle;">
+                    <td style="font-size: large; color: #212121;">
+                        Work Sector
+                    </td>
+                    <td style="font-size: large; color: #212121;">
+                        <%= f.select(:sector,options_from_collection_for_select(@work_sector, "id", "Sector"), {},:id => "DDL_Students",:style => "margin-top: 10px") %>
+                    </td>
+                </tr>  
             <% else %>
-            <td>
-                <label class="checkbox inline">
-                    <%= check_box_tag 'Skilltype2', @user_basic.id, false %>
-                    Veterans
-                </label>
-            </td>
-            <td>
-                <%= select_tag :SkillNeed2,options_from_collection_for_select(@veterans, "id", "veteran_mentor_subjects") ,:id => "DDL_Veterans" %>
-            </td>
+                <tr style="text-align: left; vertical-align: middle;">
+                    <td style="font-size: large; color: #212121;">
+                        Work Sector
+                    </td>
+                    <td style="font-size: large; color: #212121;">
+                        <%= f.select(:sector,options_from_collection_for_select(@work_sector, "id", "Sector",@user_basic.sector), {},:id  => "DDL_Students",:style => "margin-top: 10px") %>
+                    </td>
+                </tr>  
             <% end %>
-         </td>
-           
-      </tr>
-</table>
+    
+            <% if @user_basic.partnership.blank? %>
+                <tr style="text-align: left; vertical-align: middle;">
+                    <td style="font-size: large; color: #212121;">
+                        Mentoring Partnership
+                    </td>
+                    <td style="font-size: large; color: #212121;">
+                        <%= f.select(:partnership,options_from_collection_for_select(@Partnerships, "id", "Partnership"), {},:id => "DDL_Students",:style => "margin-top: 10px") %>
+                    </td>
+                </tr>  
+            <% else %>
+                <tr style="text-align: left; vertical-align: middle;">
+                    <td style="font-size: large; color: #212121;">
+                        Mentoring Partnership
+                    </td>
+                    <td style="font-size: large; color: #212121;">
+                        <%= f.select(:partnership,options_from_collection_for_select(@Partnerships, "id", "Partnership",@user_basic.partnership), {},:id => "DDL_Students",:style => "margin-top: 10px") %>
+                    </td>
+                </tr>  
+            <% end %>
+        </table>
+    </div>
 
 <h2 class="subtitle"> 
     Personal Information

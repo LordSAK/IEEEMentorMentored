@@ -84,3 +84,96 @@
     </tr>
   </table>
   ###################<!-- Signup Netowkrs -->####################
+
+
+
+
+
+
+
+
+
+
+
+
+  #########################<!-- Sign up networks-->##############
+  <table align="center" width="100%">
+    <tr>
+        <td width="20%">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>       
+        <% if @user_basic.SkillType.to_s == "1" %>
+            <td align="left" style="vertical-align: bottom; color: #212121;" class="style6">
+                <label class="checkbox inline">
+                    <%= check_box_tag :Skilltype, @user_basic.id, true %>
+                    Students
+                </label>
+            </td>
+            <td>
+                <%= select_tag :user_Need,options_from_collection_for_select(@students, "id", "student_mentor_subjects",@user_basic.user_Need) ,:id => "DDL_Students" %>
+            </td>
+            <% else %>
+            <td>
+                <label class="checkbox inline">
+                    <%= check_box_tag :Skilltype, @user_basic.id, false %>
+                    Students
+                </label>
+            </td>
+            <td>
+                <%= select_tag :user_Need,options_from_collection_for_select(@students, "id", "student_mentor_subjects") ,:id => "DDL_Students" %>
+            </td>
+        <% end %>
+         
+    </tr>
+    <tr>
+        <td>
+        </td>
+        <% if @user_basic.SkillType1.to_s == "1" %>
+            <td>
+                <label class="checkbox inline">
+                    <%= check_box_tag 'Skilltype1', @user_basic.id,true %>
+                    Entrepreneurs
+                </label>
+            </td>
+            <td>
+                <%= select_tag :SkillNeed1,options_from_collection_for_select(@entrepreneurs, "id", "entrepreneurs_mentor_subjects",@user_basic.SkillNeed1) ,:id => "DDL_Entrepreneurs" %>
+            </td>
+        <% else %>
+            <td>
+                <label class="checkbox inline">
+                    <%= check_box_tag 'Skilltype1', @user_basic.id, false %>
+                    Entrepreneurs
+                </label>
+            </td>
+            <td>
+                <%= select_tag :SkillNeed1,options_from_collection_for_select(@entrepreneurs, "id", "entrepreneurs_mentor_subjects") ,:id => "DDL_Entrepreneurs" %>
+            </td>
+        <% end %>
+    </tr>
+    <tr>
+        <td>
+        </td>
+        <% if @user_basic.SkillType2.to_s == "1" %>
+            <td>
+                <label class="checkbox inline">
+                    <%= check_box_tag 'Skilltype2', @user_basic.id, true %>
+                    Veterans
+                </label>
+            </td>
+            <td>
+                <%= select_tag :SkillNeed2,options_from_collection_for_select(@veterans, "id", "veteran_mentor_subjects",@user_basic.SkillNeed1) ,:id => "DDL_Veterans" %>
+            </td>
+        <% else %>
+            <td>
+                <label class="checkbox inline">
+                    <%= check_box_tag 'Skilltype2', @user_basic.id, false %>
+                    Veterans
+                </label>
+            </td>
+            <td>
+                <%= select_tag :SkillNeed2,options_from_collection_for_select(@veterans, "id", "veteran_mentor_subjects") ,:id => "DDL_Veterans" %>
+            </td>
+        <% end %>
+    </tr>
+</table>
+########################<!--settings network-->#####################

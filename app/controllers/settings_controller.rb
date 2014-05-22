@@ -9,12 +9,11 @@ class SettingsController < ApplicationController
     @veterans=Veterans.all
     
     
-    
-    
-    #requestfrom.first.update_attribute(:IsApproved, "2")
-    @user_basic.update_attribute( :user_Need, params[:user_Need])
-    @user_basic.update_attribute( :SkillNeed1, params[:SkillNeed1])
-    @user_basic.update_attribute( :skillNeed2, params[:SkillNeed2])   
+    @user_basic.update_attribute( :interest, params[:settings][:interest])
+    @user_basic.update_attribute( :societies, params[:settings][:societies])
+    @user_basic.update_attribute( :sector, params[:settings][:sector])
+    @user_basic.update_attribute( :partnership, params[:settings][:partnership])
+
     if !params[:settings].nil?
       @user_basic.update_attribute(:photo, params[:settings][:photo]) 
     end
@@ -275,6 +274,10 @@ end
     @user_profession=Profession.where(:UserID => current_user.id)
   	@user_education=Education.where(:UserID => current_user.id)
     @user_communication=Communication.where(:UserID => current_user.id)
+    @InterestAreas=Interest.all
+    @Societies=Societies.all
+    @work_sector=WorkSector.all
+    @Partnerships=MentoringPartnership.all
   end
 
   def index

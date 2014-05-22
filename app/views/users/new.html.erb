@@ -1,6 +1,6 @@
 <% provide(:title, 'Sign up') %>
 <script type="text/javascript">
-  $(document).ready(function () {
+/*  $(document).ready(function () {
     $("#SkillType").change(function (){
       $("#DDL_Students").toggle(this.checked);
     }).change();
@@ -14,7 +14,7 @@
     $("#DDL_Veterans").toggle(this.checked);
       }).change(); 
 
-  });
+  });*/
 </script>
 
 <h1 class="title">Sign up</h1>
@@ -262,7 +262,7 @@
 <% end %>
 <script type="text/javascript">
    $("#signup").submit(function ( event ) {
-      //alert("Hassan");
+      alert("Hassan");
       var mentor_value = $("#rb_mentor").is(':checked') ? 1 : 0;
       var mentee_value = $("#rb_mentee").is(':checked') ? 1 : 0;
       //alert(mentor_value);
