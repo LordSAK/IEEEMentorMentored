@@ -30,22 +30,23 @@
             </tr>
             <tr>
             <td align="center">
-              <%= select_tag(:interest,options_from_collection_for_select(@InterestAreas, "id", "InterestArea"),:include_blank => true) %>
+              <%= select_tag(:interest,options_from_collection_for_select(@InterestAreas, "id", "InterestArea"),{:prompt => "Interest Area"}) %>
             </td>
           </tr>
           <tr>
             <td align="center">
-              <%= select_tag(:societies, options_from_collection_for_select(@Societies, 'id', 'IEEESocieties'),:include_blank => true) %>
+              <%= select_tag(:societies, options_from_collection_for_select(@Societies, 'id', 'IEEESocieties'),{:prompt => "IEEE Societies"}) %>
             </td>
           </tr>
           <tr>
             <td align="center">
-              <%= select_tag('workSector', options_from_collection_for_select(@work_sector, 'id', 'Sector'),:include_blank => true) %>
+              <%= select_tag('workSector', options_from_collection_for_select(@work_sector, 'id', 'Sector'),{:prompt => "Work Sector"}) %>
             </td>
           </tr>
           <tr>
             <td align="center">
-              <%= select_tag('partnership', options_from_collection_for_select(@Partnerships, 'id', 'Partnership'),:include_blank => true) %>
+              <%= select_tag 'partnership', options_from_collection_for_select(@Partnerships, 'id', 'Partnership'),{ :prompt => '
+Mentoring Partnership' } %>
             </td>
           </tr>
              <tr>
