@@ -105,7 +105,7 @@
         </label>
       </td>
       <td >
-          <%= f.select(:interest,options_from_collection_for_select(@InterestAreas, "id", "InterestArea"), {},:id => "DDL_Students",:style => "margin-top: 10px") %>
+          <%= f.select(:interest,options_from_collection_for_select(@InterestAreas, "id", "InterestArea"), :include_blank => true,:id => "DDL_Students",:style => "margin-top: 10px") %>
       </td>
     </tr>  
   </table>
@@ -130,7 +130,7 @@
         </label>
       </td>
       <td >
-          <%= f.select(:societies,options_from_collection_for_select(@Societies, "id", "IEEESocieties"), {},:id => "DDL_Students",:style => "margin-top: 10px") %>
+          <%= f.select(:societies,options_from_collection_for_select(@Societies, "id", "IEEESocieties"), :include_blank => true, :id => "DDL_Students",:style => "margin-top: 10px") %>
       </td>
     </tr>  
   </table>
@@ -155,7 +155,7 @@
         </label>
       </td>
       <td >
-          <%= f.select(:sector,options_from_collection_for_select(@work_sector, "id", "Sector"), {},:id => "DDL_Students",:style => "margin-top: 10px") %>
+          <%= f.select(:sector,options_from_collection_for_select(@work_sector, "id", "Sector"), :include_blank => true,:id => "DDL_Students",:style => "margin-top: 10px") %>
       </td>
     </tr>  
   </table>
@@ -179,7 +179,7 @@
         </label>
       </td>
       <td >
-          <%= f.select(:partnership,options_from_collection_for_select(@Partnerships, "id", "Partnership"), {},:id => "DDL_Students",:style => "margin-top: 10px") %>
+          <%= f.select(:partnership,options_from_collection_for_select(@Partnerships, "id", "Partnership"), :include_blank => true,:id => "DDL_Students",:style => "margin-top: 10px") %>
       </td>
     </tr>  
   </table>
