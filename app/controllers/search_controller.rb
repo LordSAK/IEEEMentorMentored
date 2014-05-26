@@ -72,7 +72,7 @@ class SearchController < ApplicationController
 
 
     elsif desig.nil? and company.nil?
-      @user = User.find(:all, :conditions => ['(? is null or "users"."user_Zip" = ?) AND (? is null or "users"."interest" = ?) AND (? is null or "users"."societies" = ?) AND (? is null or "users"."sector" = ?) AND (? is null or "users"."partnership" =?) AND "users"."id" != ?', zip,zip,interest,interest,societies,societies,sector,sector,partner,partner,current_user.id])
+      @user = User.find(:all, :conditions => ['(? is null or "users"."user_Zip" = ?) AND ((?) is null or "users"."interest" in (?)) AND (? is null or "users"."societies" = ?) AND (? is null or "users"."sector" = ?) AND (? is null or "users"."partnership" =?) AND "users"."id" != ?', zip,zip,interest,interest,societies,societies,sector,sector,partner,partner,current_user.id])
     else
       @user_join = Profession.joins(:user).where('(? is null or "users"."user_Zip" = ?) AND (? is null or "users"."interest" = ?) AND (? is null or "users"."societies" = ?) AND (? is null or "users"."sector" = ?) AND (? is null or "users"."partnership" =?) AND (? is null or "professions"."Designation"= ?) AND  (? is null or "professions"."Company"= ?) AND "professions"."UserID" != ?', zip,zip,interest,interest,societies,societies,sector,sector,partner,partner,desig,desig,company,company, current_user.id)
     end
