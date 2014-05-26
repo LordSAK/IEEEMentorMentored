@@ -68,23 +68,23 @@
     </tr>
     <tr>
         <td width="40%" style="background-color: #FFFFFF;font-size: large" >
-            <% if !@user_availability.nil? %>
-            Availability
-            <% @user_availability.each do |user_avail| %>
-            <table width="100%" style="color:Gray;">
-                <tr>
-                    <td>
-                    	<%= user_avail.UserDays %>
-                    </td>
-                    <td align="right">
-                        <%= user_avail.TimeFrom+ " to" %>
-                    </td>
-                    <td>
-                        &nbsp;<%= user_avail.TimeTo %>
-                    </td>
-                </tr> 
-            </table>
-            <% end %>
+            <% if !@user_availability.blank? %>
+                Availability
+                <% @user_availability.each do |user_avail| %>
+                <table width="100%" style="color:Gray;">
+                    <tr>
+                        <td>
+                    	   <%= user_avail.UserDays %>
+                        </td>
+                        <td align="right">
+                            <%= user_avail.TimeFrom+ " to" %>
+                        </td>
+                        <td>
+                            &nbsp;<%= user_avail.TimeTo %>
+                        </td>
+                    </tr> 
+                </table>
+                <% end %>
             <% end %>
             <br/>
             About:<br/>

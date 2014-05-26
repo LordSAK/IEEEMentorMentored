@@ -28,22 +28,26 @@
                 <%= text_field_tag "tf_Zip",nil,:placeholder =>'Zip' %>
                </td>
             </tr>
-             <tr>
-               <td align="center">
-                  <% if current_user.SkillType== "1" %>
-                    <%= select_tag 'Interest', 
-                  options_from_collection_for_select(@students, :id, :student_mentor_subjects) %>
-                  <% elsif current_user.SkillType1=="1" %>
-                    <%= select_tag 'Interest', 
-                  options_from_collection_for_select(@students, :id, :entrepreneurs_mentor_subjects) %>
-                  <% elsif current_user.SkillType2=="1" %>
-                    <%= select_tag 'Interest', 
-                  options_from_collection_for_select(@students, :id, :veteran_mentor_subjects) %>
-                  <% end %>
-      
-                  
-               </td>
-            </tr>
+            <tr>
+            <td align="center">
+              <%= select_tag(:interest,options_from_collection_for_select(@InterestAreas, "id", "InterestArea"),:include_blank => true) %>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <%= select_tag(:societies, options_from_collection_for_select(@Societies, 'id', 'IEEESocieties'),:include_blank => true) %>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <%= select_tag('workSector', options_from_collection_for_select(@work_sector, 'id', 'Sector'),:include_blank => true) %>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <%= select_tag('partnership', options_from_collection_for_select(@Partnerships, 'id', 'Partnership'),:include_blank => true) %>
+            </td>
+          </tr>
              <tr>
                <td align="center">
                 <%= text_field_tag "tf_Designation",nil,:placeholder =>'Designation' %>
@@ -119,7 +123,8 @@
                               <td bgcolor="#CCDBE0" width="40%">
                             <%= image_tag @user_img.photo.url(:small),:alt => " " %>
                               <br/>
-                              <div><a style="color:blue;" href = 'profile?id=<%= uzr.id %>'><%= uzr.First_Name + " " + uzr.Last_Name %></a></div>
+                              <div><a style="color:blue;" href = 'profile?id=<%= uzr.id %>'>
+                                <%= uzr.First_Name + " " + uzr.Last_Name %></a></div>
                               </td>
                               <td bgcolor="#CCDBE0" width="60%" style="text-align:center;">
                               <div class='buttonblck1'><a href='searchings?id=<%= uzr.id %>'>Send Request </a></div>
