@@ -1,0 +1,30 @@
+<% provide(:title, 'Groups') %>
+
+<h1 class="title">Create Group</h1>
+<%= form_for(@group) do |f| %>
+	<table align="center" width="100%">
+		<tr>
+			<td align="center">
+				<%= f.text_field :name,placeholder: "Group Name" %>
+			</td>
+		</tr>
+		<tr>
+    		<td align="center">      
+    			<%= f.text_area :description, placeholder: "Description" %>
+    		</td>
+  		</tr>
+  		<tr>
+    		<td align="center">
+      			<%= f.select :privacy,options_for_select([["Privacy",""],["Open","Open"],["Closed","Closed"]]) %>
+    		</td>
+  		</tr>
+		
+	</table>
+	<table width="84%">
+		<tr>
+			<td align="center">
+				<%= f.submit "Create Group", :style => "background-color:#33b5e5;border-radius:15px; display:inline-block; color: white; font-family: Raleway; font-size:15px; padding:14px 30px; text-decoration: none; margin-left: 20%; margin-top: 15px; margin-bottom: 15px; text-align:center;" %>
+			</td>
+		</tr>
+	</table>
+<% end %>

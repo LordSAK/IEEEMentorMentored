@@ -1,0 +1,121 @@
+<% provide(:title, @group.name) %>
+<script>
+	$(function() {
+		var projects=[
+			<% @user.each do |u| %>
+				<% users=User.find(u.RequestFrom) %>
+				{
+					value: "<%= users.id %>",
+					label: "<%= users.First_Name+ " "+users.Last_Name %>"
+				}
+			<% end %>
+			];
+
+
+
+		$( "#project" ).autocomplete({
+			minLength: 0,
+			source: projects,
+			focus: function( event, ui ) {
+				$( "#project" ).val( ui.item.label );
+				return false;
+			},
+			select: function( event, ui ) {
+				$( "#project" ).val( ui.item.label );
+				$( "#project-id" ).val( ui.item.value );
+				return false;
+			}
+		})
+		.data( "ui-autocomplete" )._renderItem = function( ul, item ) {
+			return $( "<li>" )
+			.append( "<a>" + item.label + "<br>" )
+			.appendTo( ul );
+		};
+	});
+</script>
+
+<h1 class="title"><%= @group.name %></h1>
+
+<h4>About:</h4>
+<p class="detail"><%= @group.description %></p>
+<br/>
+<% if !@grouping.nil? %>
+<% if  @grouping.first.admin == "Y" %>
+	<% if !@requestsent.nil? %>
+		<h4 id="project-label">Requests:</h4>
+		<table class="table table-striped table-hover">
+			<% @requestsent.each do |groupReq| %>
+				<tr>
+					<td>
+						<% name=groupReq.First_Name %>
+						<% if !groupReq.Last_Name.blank? %>
+							<% name+= " " +gu.Last_Name %>
+						<% end %>
+						<a style="color:blue;" href = '/profile?id=<%= groupReq.id %>'>
+							<%= name %>
+						</a>
+					</td>
+					<td>
+						<div class="buttonblck1">
+							<a href="/approve?id=<%=@group.id%>&uid=<%=groupReq.id%>">
+								Approve
+							</a>
+						</div>
+						<div class="buttonblck1">
+							<a href="/reject?id=<%=@group.id%>&uid=<%=groupReq.id%>">
+								Reject
+							</a>
+						</div>
+					</td>
+				</tr>
+			<% end %>
+		</table>
+	<% end %>
+<% end %>
+<% end %>
+<% if !@grouping.nil? %>
+<% if @group.privacy=="Open" %>
+	<%= form_tag({controller: "groups",:action => :add, :remote => true}) do |f| %>
+		<h4 id="project-label">Add people to the group:</h4>
+		<input id="project" >
+		<input type="hidden" name="u_id" id="project-id">
+		<input id="g_id" type="hidden" name="g_id" value="<%= @group.id %>" >
+		<%=  submit_tag 'Add' %>
+	<% end %>
+<% elsif @grouping.first.admin == "Y" %>
+	<%= form_tag({controller: "groups",:action => :add, :remote => true}) do |f| %>
+		<h4 id="project-label">Add people to the group:</h4>
+		<input id="project" >
+		<input type="hidden" name="u_id" id="project-id">
+		<input id="g_id" type="hidden" name="g_id" value="<%= @group.id %>" >
+		<%=  submit_tag 'Add' %>
+	<% end %>
+<% end %>
+<% end %>
+<h4>Members:</h4>
+<table class="table table-striped table-hover" width="744">
+<tbody>
+	<% @groupusers.each do |gu| %>
+		<tr>
+			<td>
+				<% name=gu.First_Name %>
+	            <% if !gu.Last_Name.blank? %>
+		            <% name+= " " +gu.Last_Name %>
+        	    <% end %> 
+            	<a style="color:blue;" href = '/profile?id=<%= gu.id %>'>
+            		<%= name %>
+	        	</a>
+			</td>
+			<td>
+				<%= gu.user_Type %>
+			</td>
+			<td>
+				<% admincheck=GroupUser.where("user_id = ? and group_id=?",gu.id, params[:id]) %>
+				<% if !admincheck.first.admin.nil? %>
+					Administrator
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+</tbody>
+</table>

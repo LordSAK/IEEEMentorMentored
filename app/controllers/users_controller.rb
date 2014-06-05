@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:First_Name,:Last_Name, :email, :password,
-                                   :password_confirmation, :user_type, :SkillType, :user_Need,
+                                   :password_confirmation, :user_Type, :SkillType, :user_Need,
                                    :SkillType1, :SkillNeed1, :SkillType2, :skillNeed2,:photo,
                                    :user_City,:user_State,:user_Zip, :photo_file_name,
                                    :photo_content_type,:photo_file_size,:photo_updated_at,

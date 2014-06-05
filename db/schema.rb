@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520104347) do
+ActiveRecord::Schema.define(version: 20140604104626) do
 
   create_table "availabilities", force: true do |t|
     t.integer  "UserID"
@@ -48,6 +48,23 @@ ActiveRecord::Schema.define(version: 20140520104347) do
     t.string   "Private"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "group_users", force: true do |t|
+    t.integer  "group_id"
+    t.integer  "user_id"
+    t.string   "admin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "approval"
+  end
+
+  create_table "groups", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "description"
+    t.string   "privacy"
   end
 
   create_table "interests", force: true do |t|

@@ -1,4 +1,5 @@
 IEEEMentorMentored::Application.routes.draw do
+  get "groups/new"
   get "password_resets/new"
   get "profile/create"
   get "profile/profile"
@@ -26,6 +27,7 @@ IEEEMentorMentored::Application.routes.draw do
   resources :educations, only: [:create, :destroy]
   resources :settings, only: [:new, :create]
   resources :password_resets
+  resources :groups
   #resources :search, only: [:search, :create]
 
   root "static_pages#home"
@@ -54,6 +56,17 @@ IEEEMentorMentored::Application.routes.draw do
   match '/connection', to: 'static_pages#connections', via: 'get'
   match '/setting', to: 'settings#reset_password', :via => :post
   match '/deleteaccount', to: 'settings#delete_my_account', :via => :post
+
+
+  match '/add', to: 'groups#add', :via => :post
+  match '/searchgroup', to: 'groups#search', :via => :get
+  match '/searchgroup', to: 'groups#search', :via => :post
+  match '/joins', to: 'groups#add1',via: :get
+  match '/joinreq', to: 'groups#join', via: :get
+  match '/approve', to: 'groups#approve', via: :get
+  match '/reject', to: 'groups#reject', via: :get
+
+  #match '/creategroup',to: 'groups#new',via: :get
   
   #match '/reset_password', to: 'password_resets#create', via: 'get'
   #match 'profile/:id',to: 'profile#profile',via: 'get'

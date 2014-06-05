@@ -5,7 +5,6 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
-  		puts 'Hassan'
   		@blah=params[:Availability][:Monday]
   		if params[:Availability][:Monday] == "1"
   			@fromday = params[:Availability][:mondayFrom]

@@ -1,0 +1,92 @@
+<% provide(:title, "Search Group") %>
+
+<%= form_for :search, :url => { :method => :get, :action => :search } do |f| %>
+	<table width="100%" >
+    	<tr>
+        	<td align="center" style="vertical-align:top;" width="35%">
+        		<table >
+        			<tr>
+        				<td align="center">
+        					<h2 style="color:Black; font-size: x-large;">Search</h2>
+        					<%= text_field_tag "tf_keyword",nil,:placeholder =>'Group name or Keyword' %>
+	        			</td>
+    				</tr>
+    				<tr>
+    					<td align="center">
+        					<div  style="width:45px;background-color:#33b5e5;
+					border-radius:15px;
+	  				display:inline-block;
+  					color: white;
+  					font-family: Raleway;
+  					font-size:12px;
+	  				font-weight:bold;
+	  				padding:14px 30px;
+  					text-decoration: none;
+    				padding-botton:0px;	
+    				margin-top: 0px;
+    				margin-bottom: 5px;
+	    			text-align:center;">
+    	        				<input type="submit" name="search" value="Search" class="buttonSearch">
+            				</div>
+        				</td>
+	    			</tr>
+       				<tr>
+        				<td align="center">
+               				<div  style="width:45px;background-color:#33b5e5;
+  					border-radius:15px;
+	  				display:inline-block;
+  					color: white;
+  					font-family: Raleway;
+  					font-size:12px;
+  					font-weight:bold;
+  					padding:14px 30px;
+  					text-decoration: none;
+    				padding-botton:0px;
+	    			margin-top: 0px;
+    				margin-bottom: 15px;
+    				text-align:center;">
+            					<%= link_to "Back", "/default", { :class => "buttonBack"} %>
+       	  					</div>
+       					</td>
+					</tr>
+    			</table>
+    		</td>
+    		<td  align="center" style="vertical-align:top;" width="65%">
+    			<h2 style="color:Black; font-size: x-large;">Result</h2>
+    			<% if !@groups.nil? %>
+    				<table class="table table-striped table-hover">
+    					<tbody>
+    						<% @groups.each do |g| %>
+    							<tr>
+    								<td>
+    									<a style="color:blue;" href="/groups/<%=g.id%>"><%= g.name %></a>
+    								</td>
+    								<td>
+    									<%= g.description %>
+
+    									<% member= GroupUser.where("group_id = ? and user_id = ?",g.id,current_user.id) %>
+    									<% if member.first.nil? %>
+    										<% if g.privacy=="Open" %>
+    											<div class='buttonblck1'>
+    												<a href='joins?id=<%=g.id%>'>Join</a>
+    											</div>
+    										<% else %>
+    											<div class="buttonblck1">
+    												<a href="joinreq?id=<%=g.id%>">Send Request to join</a>
+    											</div>
+    										<% end %>
+    									<% else %>
+    										<div class='buttonblck1'>
+    											Already a mamber
+    										</div>
+    									<% end %>
+    								</td>
+    							</tr>
+    						<% end %>
+    					</tbody>
+    				</table>
+    			<% end %>
+    		</td>
+    	</tr>
+    </table>
+<% end %>
