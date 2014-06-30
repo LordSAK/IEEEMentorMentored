@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def new
-    @InterestAreas=Interest.all
+    @InterestAreas=Interest.order("id asc").all
     @Societies=Societies.all
     @work_sector=WorkSector.all
     @Partnerships=MentoringPartnership.all
