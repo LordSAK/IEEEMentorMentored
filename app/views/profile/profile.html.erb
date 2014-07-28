@@ -1,6 +1,6 @@
 <%= form_for :profile, :url => { :method => :get, :action => :profile } do |f| %>
 
-<table align="center" width="85%" style=" margin-top: 30px; margin-left:55px; margin-bottom:30px" >
+<table align="center" width="85%" style=" margin-top: 30px; margin-left:55px; margin-bottom:30px" border >
     <% if !@user.photo.url.blank? %>
     <tr>
         <td>
@@ -71,9 +71,9 @@
             <% if !@user_availability.blank? %>
                 Availability
                 <% @user_availability.each do |user_avail| %>
-                <table width="100%" style="color:Gray;">
+                <table width="100%" style="color:Gray;" >
                     <tr>
-                        <td>
+                        <td width="40%">
                     	   <%= user_avail.UserDays %>
                         </td>
                         <td align="right">

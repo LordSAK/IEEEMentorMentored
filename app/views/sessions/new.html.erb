@@ -7,31 +7,31 @@
   potential mentors and mentees from anywhere
   </p>
 <%= form_for(:session, url: sessions_path,:html => {:id => "signin"}) do |f| %>
-<table width="100%">
+<table width="100%" >
   <tr>
-    <td align="right" width="68%">
+    <td align="right" width="64%">
       <label for="validation_all" id="errormessage" visible="false" style="color:red;"></label>
     </td>
-    <td width="32%"></td>
+    <td ></td>
   </tr>
   <tr>
-    <td align="right" style="color: #212121;" width="68%">
+    <td align="right" style="color: #212121;" width="64%">
       <%= f.text_field :email, :placeholder => "Email", :id => "tf_email" %>
       <br/>
     </td>
-    <td width="32%"></td>
+    <td ></td>
   </tr>
   <tr>
-    <td align="right" style="color: #212121;" width="68%">
+    <td align="right" style="color: #212121;" width="64%">
           <%= f.password_field :password, :placeholder => "Enter Password", :id => "tf_password" %>
     </td>
-    <td width="32%">
+    <td >
           <label for="validation_pw" id="errormessage3" visible="false" style="color:red; font-size:x-small;">
     </td>
   </tr>
 </table>
 
-<table width="100%">
+<table width="100%" >
   <tr>
     <td width="30%"></td>
     <td >
@@ -69,7 +69,7 @@
 </table>
 
     <% end %>
-<table width="100%" align="center">
+<table width="100%" align="center" >
   <tr>
     <td align="center">
       &nbsp;&nbsp;&nbsp;
