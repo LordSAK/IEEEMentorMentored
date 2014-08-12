@@ -12,13 +12,13 @@ class InternshipsController < ApplicationController
   	if current_user.Account=="company"
       @internship=Internship.where(:CompanyID => current_user.id)
     elsif current_user.Account=="normal"
-      @internship=Internship.joins("INNER JOIN intern_users ON intern_users.internship_id=internships.id").where("ApplicantID = ?",current_user.id)  
+      @internship=Internship.joins('INNER JOIN "intern_users" ON "intern_users"."internship_id"="internships"."id"').where('"ApplicantID" = ?',current_user.id)  
     end
   end
 
   def show
   	@internship=Internship.find(params[:id])
-  	@internusers=InternUser.joins("INNER JOIN internships ON intern_users.internship_id=internships.id").where("internship_id = ?",params[:id])
+  	@internusers=InternUser.joins('INNER JOIN "internships" ON "intern_users"."internship_id"="internships"."id"').where('"internship_id" = ?',params[:id])
 
   end
 
