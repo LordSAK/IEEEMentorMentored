@@ -25,7 +25,7 @@ class InternshipsController < ApplicationController
   def openings
     @title=params[:tf_Internship] unless params[:tf_Internship]==""
     if !@title.nil?
-      @internship=Internship.find(:all, :conditions => ['"Title" LIKE ? or "Description" LIKE ? or Location LIKE ?',"%#{@title}%","%#{@title}%","%#{@title}%"])
+      @internship=Internship.find(:all, :conditions => ['"Title" LIKE ? or "Description" LIKE ? or "Location" LIKE ?',"%#{@title}%","%#{@title}%","%#{@title}%"])
     end
   end
 
