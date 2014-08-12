@@ -4,11 +4,19 @@
 	<div id="menu_container" >
         <ul class="sf-menu" id="nav" >
             <li style="margin-left:10%;">
-              <% name=current_user.First_Name %>
-              <% if !current_user.Last_Name.blank? %>
-                <% name+= " " +current_user.Last_Name %>
+              <% if current_user.Account == "company" %>
+                <% if current_user.Selector=="Company Name" %>
+                  <%= link_to current_user.CompanyName, profile_path, method: "get" %>
+                <% else %>
+                  <%= link_to current_user.AlternateName,profile_path,method: "get" %>
+                <% end %>
+              <% else %>
+                <% name=current_user.First_Name %>
+                <% if !current_user.Last_Name.blank? %>
+                  <% name+= " " +current_user.Last_Name %>
                 <% end %> 
-               <%= link_to name, profile_path, method: "get" %>    
+                <%= link_to name, profile_path, method: "get" %>    
+              <% end %>
             </li>
             <li>
               <% count = Userrequest.where('"RequestTo" = ? AND "IsApproved" = ?', current_user.id.to_s, "0").count %>

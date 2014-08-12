@@ -83,6 +83,8 @@ Mentoring Partnership' } %>
                
             </tr>
             </table>
+            <% end %>
+            
             <table align="center">
             <tr>
                <td align="center">
@@ -117,7 +119,7 @@ Mentoring Partnership' } %>
             
         </td>
     </tr>
-    <% end %>
+    
                     <% if !@user.nil? %>
                         <% @user.each do |uzr| %>
                           <tr>
@@ -128,7 +130,11 @@ Mentoring Partnership' } %>
                                 <%= uzr.First_Name + " " + uzr.Last_Name %></a></div>
                               </td>
                               <td bgcolor="#CCDBE0" width="60%" style="text-align:center;">
-                              <div class='buttonblck1'><a href='searchings?id=<%= uzr.id %>'>Send Request </a></div>
+                              <div class='buttonblck1'>
+                                <a href='searchings?id=<%= uzr.id %>'>
+                                  Send Request 
+                                </a>
+                              </div>
                               </td>
                           </tr>
                         <%  end %>

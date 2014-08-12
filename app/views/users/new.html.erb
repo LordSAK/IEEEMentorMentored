@@ -18,7 +18,12 @@
 </script>
 
 <h1 class="title">Sign up</h1>
-
+<!--
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><a href="/signup">Normal</a></li>
+  <li><a href="/signup_company">Company</a></li>
+</ul>
+-->
 <%= form_for(@user,:html => {:id => "signup"}) do |f| %>
 <%= render 'shared/error_messages' %>
 <table align="center" width="100%">

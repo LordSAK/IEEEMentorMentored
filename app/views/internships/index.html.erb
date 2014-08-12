@@ -1,0 +1,22 @@
+<% if current_user.Account=="company" %>
+	<h1 class="title">Posts created</h1>
+<% elsif current_user.Account=="normal" %>
+	<h1 class="title">Internships applied</h1>
+<% end %>
+
+<table class="table table-striped table-hover" width="744">
+<tbody>
+	<% @internship.each do |intern| %>
+		<tr>
+			<td>
+				<a style="color:blue;" href = '/internships/<%= intern.id %>'>
+            		<%= intern.Title %>
+	        	</a>
+			</td>
+			<td>
+				<%= intern.Description %>
+			</td>
+		</tr>
+	<% end %>
+</tbody>
+</table>

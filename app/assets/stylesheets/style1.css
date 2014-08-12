@@ -517,3 +517,12 @@ $grayMediumLight: #eaeaea;
  border-style: none;
  color: white;
 }
+
+.nav-tabs > li, .nav-pills > li {
+    float:none;
+    display:inline-block;
+}
+
+.nav-tabs {
+    text-align:center;
+}

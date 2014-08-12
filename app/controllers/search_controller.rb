@@ -6,8 +6,6 @@ class SearchController < ApplicationController
 
      redirect_to '/searching'
   end
-
-  
   
   def search
     @user_img = User.find(current_user.id)

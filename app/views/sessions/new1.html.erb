@@ -1,0 +1,98 @@
+<% provide(:title, "Sign in") %>
+<h2 class="subtitle">
+  Welcome to Mentor Mentored
+</h2>
+<p class="details">
+  Mentor Mentored helps you connect with<br/>
+  potential mentors and mentees from anywhere
+</p>
+<ul class="nav nav-tabs" role="tablist">
+  <li ><a href="/signin">Regular</a></li>
+  <li class="active"><a href="/signin_company">Company</a></li>
+</ul>
+<%= form_for(:session, url: sessions_path,:html => {:id => "signin"}) do |f| %>
+<table width="100%" >
+  <tr>
+    <td align="right" width="64%">
+      <label for="validation_all" id="errormessage" visible="false" style="color:red;"></label>
+    </td>
+    <td ></td>
+  </tr>
+  <tr>
+    <td align="right" style="color: #212121;" width="64%">
+      <%= f.text_field :email, :placeholder => "Email", :id => "tf_email" %>
+      <br/>
+    </td>
+    <td ></td>
+  </tr>
+  <tr>
+    <td align="right" style="color: #212121;" width="64%">
+      <%= f.password_field :password, :placeholder => "Enter Password", :id => "tf_password" %>
+    </td>
+    <td >
+      <label for="validation_pw" id="errormessage3" visible="false" style="color:red; font-size:x-small;">
+    </td>
+  </tr>
+</table>
+<br/>
+<table width="83%" >
+  <tr>
+    <td align="center">
+      <div id="loginbutton">
+        <%= f.submit "Sign in", :style => "color:White;background-color:Transparent;border-style:none;font-family:Arial;font-size:Medium;height:35px" %>
+      </div>
+    </td>
+  </tr>
+</table>
+<% end %>
+<table width="100%" align="center" >
+  <tr>
+    <td align="center">
+      &nbsp;&nbsp;&nbsp;<p> <%= link_to "Forgot your password!", new_password_reset_path,:style => "color:Gray;font-size:Large;text-decoration:none" %></p>
+    </td>
+  </tr>
+</table>
+<script type="text/javascript">
+  $("#signin").submit(function ( event ) {
+    //var email = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i;
+    var email = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    //alert(email);
+    var hasError1 = false;
+    var inp_email = $("#tf_email").val();
+    var inp_pw = $("#tf_password").val();
+    //alert(inp_pw.length);
+    //var inp_email = $("#tb_email").val();
+    if(!email.test(inp_email)){
+      if (inp_pw == 0){
+        var message = $("#errormessage").html("Invalid Email/Password");//alert("Hassan");
+        message.show();
+        hasError = true; 
+      }
+      else {
+        var message = $("#errormessage").html("Invalid Email/Password");//alert("Hassan");
+        message.show();
+        hasError = true; 
+      }
+    }
+    else{
+      if (inp_pw == 0){
+        var message = $("#errormessage").html("Invalid Email/Password");//alert("Hassan");
+        message.show();
+        hasError = true; 
+      }
+      else{
+        hasError = false;
+        $("#errormessage").empty().hide();
+      }
+    }
+    if(inp_pw.length < 6){ 
+      var message = $("#errormessage3").html("Password must be greater then 5 characters");
+      message.show();
+      hasError = true; 
+    }
+    else{
+      hasError = false;
+      $("#errormessage3").empty().hide();
+    }
+  });
+</script>

@@ -51,4 +51,32 @@
  </div>
    </td>
 </tr>
+<% if current_user.Account=="company" %>
+  <tr>
+    <td style="color: #212121;">
+      <div class="button">
+        <%= button_to "Create Internship Post", new_internship_path, {method: :get, :class => "buttonhome",:style => "width:200px;height:80px"} %>
+      </div>
+    </td>
+    <td style="color: #212121;">
+      <div class="button">
+        <%= button_to "Internships Published", internships_path, { method: :get, :class => "buttonhome",:style => "width:200px;height:80px" } %>
+      </div>
+    </td>
+  </tr>
+<% elsif current_user.Account=="normal" %>
+  <tr>
+   <td style="color: #212121;">
+    <div class="button">
+      
+      <%= button_to "Search Internship", "/openings", {method: :get, :class => "buttonhome",:style => "width:200px;height:80px"} %>
+ </div>
+   </td>
+   <td style="color: #212121;">
+    <div class="button">
+      <%= button_to "Posts I have applied for", internships_path, { method: :get, :class => "buttonhome",:style => "width:200px;height:80px" } %>
+ </div>
+   </td>
+</tr>
+<% end %>
 </table>

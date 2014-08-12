@@ -1,0 +1,83 @@
+<table width="100%" >
+  <tr>
+    <td align="center" style="vertical-align:top;" width="35%">
+      <h2 style="color:Black; font-size: x-large;">Internships</h2>               
+      <%= form_for :search1, :url => { :method => :get, :action => :openings } do |f1| %>
+        <table align="center">
+          <tr>
+            <td align="center">
+              <%= text_field_tag "tf_Internship",nil,:placeholder =>'Internship' %>
+            </td>
+          </tr>
+        </table>
+        <table align="center" >
+          <tr>
+            <td align="center">
+              <div  style="width:45px;background-color:#33b5e5;
+                border-radius:15px;
+                display:inline-block;
+                color: white;
+                font-family: Raleway;
+                font-size:12px;
+                font-weight:bold;
+                padding:14px 30px;
+                text-decoration: none;
+                padding-botton:0px;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                text-align:center;">
+                <input type="submit" name="searches" value="Find" class="buttonSearch">
+              </div>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+      <table align="center">
+        <tr>
+          <td align="center">
+            <div  style="width:45px;background-color:#33b5e5;
+                border-radius:15px;
+                display:inline-block;
+                color: white;
+                font-family: Raleway;
+                font-size:12px;
+                font-weight:bold;
+                padding:14px 30px;
+                text-decoration: none;
+                padding-botton:0px;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                text-align:center;">
+              <%= link_to "Back", "/default", { :class => "buttonBack"} %>
+            </div>   
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td align="center" style="vertical-align:top;" width="35%">
+      <h2 style="color:Black; font-size: x-large;">
+        Result
+      </h2>
+      <table id="searchResult" width="60%" >
+        <% if !@internship.nil? %>
+          <% @internship.each do |internship| %>
+              <tr>
+                <td  bgcolor="#CCDBE0" width="60%" style="text-align:right;" >
+                  <br/>
+                  <div align="left" style="font-weight:bold">
+                    &nbsp;&nbsp;<strong><%= internship.Title %></strong>
+                  </div>
+
+                  <div align="center" class='buttonblck1'>
+                    <a href = '/internships/<%= internship.id %>'>
+                      View Opening
+                    </a>
+                  </div>&nbsp;&nbsp;
+                </td>
+              </tr>
+          <%  end %>
+        <% end %>
+      </table>
+    </td>
+  </tr>
+</table>

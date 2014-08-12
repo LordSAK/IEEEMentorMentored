@@ -1,0 +1,104 @@
+<h1 class="title"><%= @internship.Title %></h1>
+
+<h4>Description:</h4>
+<p class="detail"><%= @internship.Description %></p>
+<br/>
+
+<% if current_user.Account == "company" %>
+<h4>Applicants:</h4>
+<table class="table table-striped table-hover" width="744">
+<tbody>
+	<% @internusers.each do |iu| %>
+		<tr>
+			<td>
+        <% @user=User.find(iu.ApplicantID) %>
+        <% name=@user.First_Name %>
+        <% if !@user.Last_Name.blank? %>
+          <% name+= " " +@user.Last_Name %>
+        <% end %>
+        <a style="color:blue;" href = '<%= iu.resume_path %>'>
+          <%= name %>
+        </a>
+			</td>
+			
+			<td>
+				
+			</td>
+		</tr>
+	<% end %>
+</tbody>
+</table>
+<table align="center" width="100%">
+  <tr>
+        <td style="font-size: x-large; color: #212121; text-align:center;" height="35px;">
+            <div style="width:30px;background-color:#33b5e5;
+          border-radius:15px;
+          display:inline-block;
+          color: white;
+          font-family: Raleway;
+          font-size:12px;
+          font-weight:bold;
+          padding:14px 30px;
+          text-decoration: none;
+          padding-botton:0px;
+          margin-top: 0px;
+          margin-bottom: 15px;
+          text-align:center;">
+                <%= link_to "Back", "/default", { :class => "buttonBack"} %>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<% elsif current_user.Account == "normal" %>
+  <%= form_for :internships, :url => {:action => :upload}, :html=> {:multipart => true} do |f| %>
+    <table  >
+      <tr>
+        <td style="color: #212121; text-align:center;" height="35px;">
+          <input type="hidden" name="id" value="<%= params[:id]%>">
+          <strong>Upload Your CV</strong> &nbsp;&nbsp;&nbsp;
+          <%= f.file_field :file %>
+        </td>
+      </tr>
+    </table>
+    <table align="center" width="40%">
+  <tr>
+        <td style="font-size: x-large; color: #212121; text-align:center;" height="35px;">
+            <div style="background-color:#33b5e5;
+          border-radius:15px;
+          display:inline-block;
+          color: white;
+          font-family: Raleway;
+          font-size:12px;
+          font-weight:bold;
+          padding:14px 30px;
+          text-decoration: none;
+          padding-botton:0px;
+          margin-top: 0px;
+          margin-bottom: 15px;
+          text-align:center;">
+               <input type="submit" class = "buttonSearch" value= 'Apply'>
+            </div>
+        </td>
+        <td style="font-size: x-large; color: #212121; text-align:center;" height="35px;">
+            <div style="background-color:#33b5e5;
+          border-radius:15px;
+          display:inline-block;
+          color: white;
+          font-family: Raleway;
+          font-size:12px;
+          font-weight:bold;
+          padding:14px 30px;
+          text-decoration: none;
+          padding-botton:0px;
+          margin-top: 0px;
+          margin-bottom: 15px;
+          text-align:center;">
+                <%= link_to "Back", "/default", { :class => "buttonSearch"} %>
+            </div>
+        </td>
+    </tr>
+</table>
+  <% end %>
+<% end %>
+

@@ -18,17 +18,41 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def new1
+    @InterestAreas=Interest.order("id asc").all
+    @Societies=Societies.all
+    @work_sector=WorkSector.all
+    @Partnerships=MentoringPartnership.all
+    @user = User.new
+  end
+
   def create
     @students=Students.all
     @entrepreneurs=Entrepreneurs.all
     @veterans=Veterans.all
     @user = User.new(user_params)    # Not the final implementation!
     if @user.save
+      @user.update_attribute(:Account,"normal")
       sign_in @user
       flash[:success] = "Welcome to the Mentor Mentored!"
       redirect_to '/availabilities'
     else
       render 'new'
+    end
+  end
+
+  def create1
+    @students=Students.all
+    @entrepreneurs=Entrepreneurs.all
+    @veterans=Veterans.all
+    @user = User.new(company_params)    # Not the final implementation!
+    if @user.save
+      @user.update_attribute(:Account,"company")
+      sign_in @user
+      flash[:success] = "Welcome to the Mentor Mentored!"
+      redirect_to '/availabilities'
+    else
+      render 'new1'
     end
   end
 
@@ -55,6 +79,14 @@ class UsersController < ApplicationController
                                    :photo_content_type,:photo_file_size,:photo_updated_at,
                                    :auth_token,:password_reset_token,:password_reset_sent_at,
                                    :interest,:societies,:sector,:partnership)
+    end
+
+    def company_params
+      params.require(:user).permit(:CompanyName,:AlternateName,:email,:password,:password_confirmation,
+        :Selector,:From,:To,:user_City,:user_State,:user_Zip, :photo_file_name,
+                                   :photo_content_type,:photo_file_size,:photo_updated_at,
+                                   :auth_token,:password_reset_token,:password_reset_sent_at,
+                                   :interest)
     end
 
     def signed_in_user

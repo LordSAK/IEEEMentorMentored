@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140604104626) do
+ActiveRecord::Schema.define(version: 20140812065417) do
 
   create_table "availabilities", force: true do |t|
     t.integer  "UserID"
@@ -69,6 +69,23 @@ ActiveRecord::Schema.define(version: 20140604104626) do
 
   create_table "interests", force: true do |t|
     t.string   "InterestArea"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "intern_users", force: true do |t|
+    t.string   "resume_path"
+    t.integer  "internship_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "ApplicantID"
+  end
+
+  create_table "internships", force: true do |t|
+    t.string   "Title"
+    t.string   "Description"
+    t.string   "Location"
+    t.integer  "CompanyID"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -135,6 +152,12 @@ ActiveRecord::Schema.define(version: 20140604104626) do
     t.string   "societies"
     t.string   "sector"
     t.string   "partnership"
+    t.string   "CompanyName"
+    t.string   "AlternateName"
+    t.string   "Selector"
+    t.string   "From"
+    t.string   "To"
+    t.string   "Account"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

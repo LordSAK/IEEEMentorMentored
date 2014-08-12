@@ -5,7 +5,11 @@
 <p class="details">
   Mentor Mentored helps you connect with<br/>
   potential mentors and mentees from anywhere
-  </p>
+</p>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><a href="/signin">Regular</a></li>
+  <li ><a href="/signin_company">Company</a></li>
+</ul>
 <%= form_for(:session, url: sessions_path,:html => {:id => "signin"}) do |f| %>
 <table width="100%" >
   <tr>

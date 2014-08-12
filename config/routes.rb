@@ -28,11 +28,15 @@ IEEEMentorMentored::Application.routes.draw do
   resources :settings, only: [:new, :create]
   resources :password_resets
   resources :groups
+  resources :internships
   #resources :search, only: [:search, :create]
 
   root "static_pages#home"
   match '/signup', to: 'users#new', via: 'get'
+  match '/signup_company', to: 'users#new1', via: 'get'
+  match 'signup_create1',to: 'users#create1',via: 'post'
   match '/signin', to: 'sessions#new',via: 'get'
+  match '/signin_company', to: 'sessions#new1',via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
   match '/default', to: 'static_pages#default', via: 'get'  
   match '/availabilities', to: 'availabilities#new', via: 'get'
@@ -43,6 +47,9 @@ IEEEMentorMentored::Application.routes.draw do
   #match '/search',  to: 'static_pages#search',    via: 'get'
   match '/searching',  to: 'search#search', via: 'get'
   match '/searching',  to: 'search#search', via: 'post'
+  match '/openings',  to: 'internships#openings', via: 'get'
+  match '/openings',  to: 'internships#openings', via: 'post'
+  match '/apply', to: 'internships#upload', via: 'post'
   match '/searchings', to: 'search#create', via: 'get'
   match '/profile', to: 'profile#profile', via: 'get'
   match '/pendingrequest', to: 'static_pages#pending_request', via: 'get'
