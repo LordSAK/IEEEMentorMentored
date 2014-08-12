@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     @Societies=Societies.all
     @work_sector=WorkSector.all
     @Partnerships=MentoringPartnership.all
-    @user = User.new
+    @user1 = User.new
   end
 
   def create
