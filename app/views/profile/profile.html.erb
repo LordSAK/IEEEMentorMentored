@@ -12,8 +12,15 @@
     <tr>
         <td width="40%" style="background-color: #FFFFFF;font-size: large" class="style1" ForeColor="Gray">
             <%= image_tag @user.photo.url(:small),:alt => " " %><br/>
-            <%= @user.First_Name + " " + @user.Last_Name %>
-        
+            <% if @userr.Account=="company" %>
+                <% if @user.Selector =="Company Name" %>
+                    <%= @user.CompanyName %>
+                <% else %>
+                    <%= @user.AlternateName %>
+                <% end %>
+            <% elsif @user.Account == "normal" %>
+                <%= @user.First_Name + " " + @user.Last_Name %>
+            <% end %>
         </td>
         <td width="60%" style="background-color:#00BFFF;font-size: large">
             <% @user_education.each do |user_edu| %>
@@ -88,7 +95,15 @@
             <% end %>
             <br/>
             About:<br/>
-            <%=  @user.First_Name + " " + @user.Last_Name %>
+            <% if @user.Account=="company" %>
+                <% if @user.Selector =="Company Name" %>
+                    <%= @user.CompanyName %>
+                <% else %>
+                    <%= @user.AlternateName %>
+                <%end %>
+            <% elsif @user.Account == "normal" %>
+                <%= @user.First_Name + " " + @user.Last_Name %>
+            <% end %>
         </td>
         <td width="60%" style="background-color:#00BFFF;font-size: large">
             <table style="color:white;">
