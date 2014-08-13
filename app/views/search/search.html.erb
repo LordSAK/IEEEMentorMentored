@@ -124,10 +124,25 @@ Mentoring Partnership' } %>
                         <% @user.each do |uzr| %>
                           <tr>
                               <td bgcolor="#CCDBE0" width="40%">
-                            <%= image_tag @user_img.photo.url(:small),:alt => " " %>
-                              <br/>
-                              <div><a style="color:blue;" href = 'profile?id=<%= uzr.id %>'>
-                                <%= uzr.First_Name + " " + uzr.Last_Name %></a></div>
+                                <%= image_tag @user_img.photo.url(:small),:alt => " " %>
+                                <br/>
+                                <div>
+                                  <% if uzr.Account=="company" %>
+                                    <% if uzr.Selector =="Company Name" %>
+                                      <a style="color:blue;" href = 'profile?id=<%= uzr.id %>'>
+                                        <%= uzr.CompanyName %>
+                                      </a>
+                                    <% else %>
+                                        <a style="color:blue;" href = 'profile?id=<%= uzr.id %>'>
+                                          <%= uzr.AlternateName %>
+                                        </a>
+                                    <%end %>
+                                  <% elsif uzr.Account == "normal" %>
+                                    <a style="color:blue;" href = 'profile?id=<%= uzr.id %>'>
+                                      <%= uzr.First_Name + " " + uzr.Last_Name %>
+                                    </a>
+                                  <% end %>
+                                </div>
                               </td>
                               <td bgcolor="#CCDBE0" width="60%" style="text-align:center;">
                               <div class='buttonblck1'>
