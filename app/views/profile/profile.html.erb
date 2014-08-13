@@ -12,7 +12,7 @@
     <tr>
         <td width="40%" style="background-color: #FFFFFF;font-size: large" class="style1" ForeColor="Gray">
             <%= image_tag @user.photo.url(:small),:alt => " " %><br/>
-            <% if @userr.Account=="company" %>
+            <% if @user.Account=="company" %>
                 <% if @user.Selector =="Company Name" %>
                     <%= @user.CompanyName %>
                 <% else %>
