@@ -159,27 +159,28 @@
 <% end %>
 
 <script type="text/javascript">
-//   $("#signup").submit(function ( event ) {
+   $("#signup").submit(function ( event ) {
 
-//      var network_value1 = $("#SkillType").is(':checked') ? 1 : 0;
-//      var network_value2 = $("#SkillType1").is(':checked') ? 1 : 0;
-//     var network_value3 = $("#SkillType2").is(':checked') ? 1 : 0;
-//      //alert(mentor_value);
-//      var hasError1 = false;
-//      if(network_value1 == 0 && network_value2 == 0 && network_value3 == 0)
-//      {
-//        var message = $("#errormessage2").html("Please Select");
-//        message.show();
-//       hasError1 = true;
-//      } 
-//      else
-//      {
-//        hasError1 = false;
-//        $("#errormessage2").empty().hide();
-//      }
-//      if(hasError1)
-//      {
-//        event.preventDefault();
-//      }
-//  });
+      var network_value1 = jQuery.trim($("#email").val());
+      var network_value2 = jQuery.trim($("#password").val());
+     //var network_value3 = $("#SkillType2").is(':checked') ? 1 : 0;
+      //alert(mentor_value);
+          
+      var hasError1 = false;
+      if(network_value1.length == 0 && network_value2.length == 0 )
+      {
+        var message = $("#errormessage2").html("Select/Password Fields are empty");
+        message.show();
+       hasError1 = true;
+      } 
+      else
+      {
+        hasError1 = false;
+        $("#errormessage2").empty().hide();
+      }
+      if(hasError1)
+      {
+        event.preventDefault();
+      }
+  });
 </script>
