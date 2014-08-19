@@ -39,7 +39,7 @@
 <h4>About:</h4>
 <p class="detail"><%= @group.description %></p>
 <br/>
-<% if !@grouping.nil? %>
+<% if !@grouping.empty? %>
 <% if  @grouping.first.admin == "Y" %>
 	<% if !@requestsent.nil? %>
 		<h4 id="project-label">Requests:</h4>
@@ -73,7 +73,7 @@
 	<% end %>
 <% end %>
 <% end %>
-<% if !@grouping.nil? %>
+<% if !@grouping.empty? %>
 <% if @group.privacy=="Open" %>
 	<%= form_tag({controller: "groups",:action => :add, :remote => true}) do |f| %>
 		<h4 id="project-label">Add people to the group:</h4>
