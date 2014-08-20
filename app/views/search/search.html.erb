@@ -160,19 +160,19 @@ Mentoring Partnership' } %>
                               <td bgcolor="#CCDBE0" width="40%">
                               
                               <br/>
-                              <div><% if uzr.Account=="company" %>
-                                    <% if uzr.Selector =="Company Name" %>
-                                      <a style="color:blue;" href = 'profile?id=<%= uzr.id %>'>
-                                        <%= uzr.CompanyName %>
+                              <div><% if uzr_join.Account=="company" %>
+                                    <% if uzr_join.Selector =="Company Name" %>
+                                      <a style="color:blue;" href = 'profile?id=<%= uzr_join.id %>'>
+                                        <%= uzr_join.CompanyName %>
                                       </a>
                                     <% else %>
-                                        <a style="color:blue;" href = 'profile?id=<%= uzr.id %>'>
-                                          <%= uzr.AlternateName %>
+                                        <a style="color:blue;" href = 'profile?id=<%= uzr_join.id %>'>
+                                          <%= uzr_join.AlternateName %>
                                         </a>
                                     <%end %>
                                   <% elsif uzr.Account == "normal" %>
-                                    <a style="color:blue;" href = 'profile?id=<%= uzr.id %>'>
-                                      <%= uzr.First_Name + " " + uzr.Last_Name %>
+                                    <a style="color:blue;" href = 'profile?id=<%= uzr_join.id %>'>
+                                      <%= uzr_join.First_Name + " " + uzr_join.Last_Name %>
                                     </a>
                                   <% end %></div>
                               </td>
