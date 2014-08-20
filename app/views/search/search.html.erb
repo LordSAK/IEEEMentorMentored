@@ -156,23 +156,24 @@ Mentoring Partnership' } %>
                     <% end %>
                     <% if !@user_join.nil? %>
                         <% @user_join.each do |uzr_join| %>
+                          <% user=User.find(uzr_join.UserID) %>
                           <tr>
                               <td bgcolor="#CCDBE0" width="40%">
                               
                               <br/>
-                              <div><% if uzr_join.Account=="company" %>
-                                    <% if uzr_join.Selector =="Company Name" %>
-                                      <a style="color:blue;" href = 'profile?id=<%= uzr_join.id %>'>
-                                        <%= uzr_join.CompanyName %>
+                              <div><% if user.Account=="company" %>
+                                    <% if user.Selector =="Company Name" %>
+                                      <a style="color:blue;" href = 'profile?id=<%= user.id %>'>
+                                        <%= user.CompanyName %>
                                       </a>
                                     <% else %>
-                                        <a style="color:blue;" href = 'profile?id=<%= uzr_join.id %>'>
-                                          <%= uzr_join.AlternateName %>
+                                        <a style="color:blue;" href = 'profile?id=<%= user.id %>'>
+                                          <%= user.AlternateName %>
                                         </a>
                                     <%end %>
-                                  <% elsif uzr.Account == "normal" %>
-                                    <a style="color:blue;" href = 'profile?id=<%= uzr_join.id %>'>
-                                      <%= uzr_join.First_Name + " " + uzr_join.Last_Name %>
+                                  <% elsif user.Account == "normal" %>
+                                    <a style="color:blue;" href = 'profile?id=<%= user.id %>'>
+                                      <%= user.First_Name + " " + user.Last_Name %>
                                     </a>
                                   <% end %></div>
                               </td>
@@ -180,6 +181,7 @@ Mentoring Partnership' } %>
                               <div class='buttonblck1'><a href='searchings?id=<%= uzr_join.UserID %>'>Send Request </a></div>
                               </td>
                           </tr>
+                          <% end %>
                         <%  end %>
                     <% end %>
             </table>
