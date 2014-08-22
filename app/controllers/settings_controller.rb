@@ -76,10 +76,8 @@ class SettingsController < ApplicationController
       @user_profession.each do |p|
       if params[:ChkBx_Profession].to_i == 1
         p.update_attribute( :Private, params[:ChkBx_Profession] )
-        puts "Hassan"
       elsif params[:ChkBx_Profession].to_i == 0
         p.update_attribute( :Private, "0" )
-        puts "Ali"
       end
     end
   end
@@ -124,28 +122,31 @@ class SettingsController < ApplicationController
             @to=to          
           end
         end
-        @Education = Education.new( :UserID => current_user.id, :SchoolName => @degree, :SchoolFrom => @from, :SchoolTo => @to )
-        @Education.save
+          @Education = Education.new( :UserID => current_user.id, :SchoolName => @degree, :SchoolFrom => @from, :SchoolTo => @to )
+          @Education.save
+        end
+      end
+      end
+      @user_education=Education.where(:UserID => current_user.id)
+      if !@user_education.blank?
+        @user_education.each do |e|
+        if params[:ChkBx_Education].to_i == 1
+          e.update_attribute( :Private, params[:ChkBx_Education] )
+        elsif params[:ChkBx_Education].to_i == 0
+          e.update_attribute( :Private, "0" )
+        end
       end
     end
-    end
-    @user_education=Education.where(:UserID => current_user.id)
-    if !@user_education.blank?
-      @user_education.each do |e|
-      if params[:ChkBx_Education].to_i == 1
-        e.update_attribute( :Private, params[:ChkBx_Education] )
-        puts "Hassan1"
-      elsif params[:ChkBx_Education].to_i == 0
-        e.update_attribute( :Private, "0" )
-        puts "Ali1"
-      end
-    end
-  end
-           
+
+
+  @user_communication=Communication.where(:UserID => current_user.id)
     Communication.delete_all(:UserID => current_user.id)     
-    if !params[:tf_Phone].blank?
+    if !params[:tf_phone].blank?
         @Phone = "Phone"
         @Phone_detail = params[:tf_phone]
+        if params[:settings][:ChkBx_Phone] == "on" or params[:settings][:ChkBx_Phone] == "1"
+          @publicphone = "1"
+        end
         @Phone_Preferred = "Preferred"
         @communication=Communication.new( :UserID => current_user.id, :CommunicationMode => @Phone, :CommunicationDetail => @Phone_detail, :Private => @publicphone, :Preferred => @Phone_Preferred)
         @communication.save
@@ -154,6 +155,9 @@ class SettingsController < ApplicationController
     if !params[:tf_email].blank?
         @Email = "Email"
         @Email_detail = params[:tf_email]
+        if params[:settings][:ChkBx_Email] == "on" or params[:settings][:ChkBx_Email] == "1"
+          @publicemail = "1"
+        end  
         @Email_Preferred = "Preferred"
         @communication=Communication.new( :UserID => current_user.id, :CommunicationMode => @Email, :CommunicationDetail => @Email_detail, :Private => @publicemail, :Preferred => @Email_Preferred)     
         @communication.save
@@ -162,6 +166,9 @@ class SettingsController < ApplicationController
     if !params[:tf_skype].blank?  
         @Skype = "Skype"
         @Skype_detail = params[:tf_skype]
+        if params[:settings][:ChkBx_Skype] == "on" or params[:settings][:ChkBx_Skype] == "1"
+          @publicskype = "1"
+        end
         @Skype_Preferred = "Preferred"
         @communication=Communication.new( :UserID => current_user.id, :CommunicationMode => @Skype, :CommunicationDetail => @Skype_detail, :Private => @publicskype, :Preferred => @Skype_Preferred)
         @communication.save 
@@ -170,6 +177,9 @@ class SettingsController < ApplicationController
     if !params[:tf_website].blank?  
       @Website = "Website"
       @Website_detail = params[:tf_website]
+        if params[:settings][:ChkBx_Website] == "on" or params[:settings][:ChkBx_Website] == "1"
+          @publicwebsite = "1"
+        end
       @Website_Preferred = "Preferred"
       @communication=Communication.new( :UserID => current_user.id, :CommunicationMode => @Website, :CommunicationDetail => @Website_detail, :Private => @publicwebsite, :Preferred => @Website_Preferred)
       @communication.save
@@ -178,54 +188,41 @@ class SettingsController < ApplicationController
     if !params[:tf_twitter].blank?  
       @Twitter = "Twitter"
       @Twitter_detail = params[:tf_twitter]
+        if params[:settings][:ChkBx_Twitter] == "on" or params[:settings][:ChkBx_Twitter] == "1"
+          @publictwitter = "1"
+        end
       @Twitter_Preferred = "Preferred"
       @communication=Communication.new( :UserID => current_user.id, :CommunicationMode => @Twitter, :CommunicationDetail => @Twitter_detail, :Private => @publictwitter, :Preferred => @Twitter_Preferred)
       @communication.save
     end
-  @user_communication=Communication.where(:UserID => current_user.id)
-  if !@user_communication.blank?
-    @user_communication.each do |c|
-    if params[:ChkBx_Phone].to_i == 1
-      c.update_attribute( :Private, params[:ChkBx_Phone] )
-      puts "Hassan2"
-    elsif params[:ChkBx_Phone].to_i == 0
-      c.update_attribute( :Private, "0" )
-      puts "Ali2"
-    end
 
-    if params[:ChkBx_Email].to_i == 1
-      c.update_attribute( :Private, params[:ChkBx_Email] )
-      puts "Hassan3"
-    elsif params[:ChkBx_Email].to_i == 0
-      c.update_attribute( :Private, "0" )
-      puts "Ali3"
-    end
-    
-    if params[:ChkBx_Skype].to_i == 1
-      c.update_attribute( :Private, params[:ChkBx_Skype] )
-      puts "Hassan4"
-    elsif params[:ChkBx_Skype].to_i == 0
-      c.update_attribute( :Private, "0" )
-      puts "Ali4"
-    end
+  #  @user_communication=Communication.where(:UserID => current_user.id)
+  #  if !@user_communication.blank?
+  #      @user_communication.each do |c|
+  #        puts params[:settings][:ChkBx_Email].to_s
+  #        if params[:settings][:ChkBx_Email] == "on"
+  #          Communication.delete_all(:UserID => current_user.id)
+  #          @user_communication = Communication.new( :UserID => current_user.id, :CommunicationMode => @Phone, :CommunicationDetail => @Phone_detail, :Private => "1", :Preferred => @Phone_Preferred)
+  #          @user_communication = Communication.new( :UserID => current_user.id, :CommunicationMode => @Email, :CommunicationDetail => @Email_detail, :Private => @publicemail, :Preferred => @Email_Preferred)     
+  #          @user_communication = Communication.new( :UserID => current_user.id, :CommunicationMode => @Skype, :CommunicationDetail => @Skype_detail, :Private => @publicskype, :Preferred => @Skype_Preferred)
+  #          @user_communication = Communication.new( :UserID => current_user.id, :CommunicationMode => @Website, :CommunicationDetail => @Website_detail, :Private => @publicwebsite, :Preferred => @Website_Preferred)
+  #          @user_communication = Communication.new( :UserID => current_user.id, :CommunicationMode => @Twitter, :CommunicationDetail => @Twitter_detail, :Private => @publictwitter, :Preferred => @Twitter_Preferred)
+  #          @user_communication.save
+  #            #c.update_attribute( :Private, "1")
+  #        end
 
-    if params[:ChkBx_Website].to_i == 1
-      c.update_attribute( :Private, params[:ChkBx_Website] )
-      puts "Hassan4"
-    elsif params[:ChkBx_Website].to_i == 0
-      c.update_attribute( :Private, "0" )
-      puts "Ali4"
-    end
-
-    if params[:ChkBx_Twitter].to_i == 1
-      c.update_attribute( :Private, params[:ChkBx_Twitter] )
-      puts "Hassan4"
-    elsif params[:ChkBx_Twitter].to_i == 0
-      c.update_attribute( :Private, "0" )
-      puts "Ali4"
-    end
-  end
-end
+  #        if params[:settings][:ChkBx_Skype] == "on"
+  #          Communication.delete_all(:UserID => current_user.id)
+  #          @user_communication = Communication.new( :UserID => current_user.id, :CommunicationMode => @Phone, :CommunicationDetail => @Phone_detail, :Private => @publicphone, :Preferred => @Phone_Preferred)
+  #          @user_communication = Communication.new( :UserID => current_user.id, :CommunicationMode => @Email, :CommunicationDetail => @Email_detail, :Private => "1", :Preferred => @Email_Preferred)     
+  #          @user_communication = Communication.new( :UserID => current_user.id, :CommunicationMode => @Skype, :CommunicationDetail => @Skype_detail, :Private => @publicskype, :Preferred => @Skype_Preferred)
+  #          @user_communication = Communication.new( :UserID => current_user.id, :CommunicationMode => @Website, :CommunicationDetail => @Website_detail, :Private => @publicwebsite, :Preferred => @Website_Preferred)
+  #          @user_communication = Communication.new( :UserID => current_user.id, :CommunicationMode => @Twitter, :CommunicationDetail => @Twitter_detail, :Private => @publictwitter, :Preferred => @Twitter_Preferred)
+  #          @user_communication.save
+              #c.update_attribute( :Private, "1")
+  #        end     
+  #      end
+  #  end    
 
     redirect_to "/default"
     #@user = User.new(user_params)
@@ -252,7 +249,6 @@ end
   def delete_my_account
     user = User.find_by(email: current_user.email.downcase)
     if user && user.authenticate(params[:tf_password])
-      puts "Hassan"
       User.delete( user.id )
       Availability.delete_all(:UserID => user.id)
       Profession.delete_all(:UserID => user.id)
