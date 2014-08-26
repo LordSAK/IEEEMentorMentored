@@ -488,24 +488,35 @@
             <%= label(:label2, "Show these details in search result", {}, { :class => "labelTo" }) %>
             <br />
             <table>
-                <% if @user_basic.Private.to_s == "1" %>
-                <tr>
-                    <td>
-                        <label class="checkbox inline">     
-                            <input type="checkbox" name="settings[ChkBx_Location]" id="settings[ChkBx_Location]" value="1" checked = "checked">
-                            Location
-                        </label>
-                    </td>
-                </tr>
+                <% if @user_basic.any? %>
+                    <% if @user_basic.Private.to_s == "1" %>
+                        <tr>
+                            <td>
+                                <label class="checkbox inline">     
+                                    <input type="checkbox" name="settings[ChkBx_Location]" id="settings[ChkBx_Location]" value="1" checked = "checked">
+                                    Location
+                                </label>
+                            </td>
+                        </tr>
+                    <% else %>
+                        <tr>
+                            <td>
+                                <label class="checkbox inline">     
+                                    <input type="checkbox" name="settings[ChkBx_Location]" id="settings[ChkBx_Location]">
+                                    Location
+                                </label>
+                            </td>
+                        </tr>
+                    <% end %>
                 <% else %>
-                <tr>
-                    <td>
-                        <label class="checkbox inline">     
-                            <input type="checkbox" name="settings[ChkBx_Location]" id="settings[ChkBx_Location]">
-                            Location
-                        </label>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            <label class="checkbox inline">     
+                                <input type="checkbox" name="settings[ChkBx_Location]" id="settings[ChkBx_Location]">
+                                 Location
+                            </label>
+                        </td>
+                    </tr>
                 <% end %>
             </table>
             <table >
