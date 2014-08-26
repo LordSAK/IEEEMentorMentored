@@ -14,8 +14,11 @@ class ProfileController < ApplicationController
   	else
   		@user_id= params[:id]
       @user=User.find(@user_id)
-
+      if @user.blank?
         @user_private = @user.Private
+      else
+        @user_private=0
+      end
 
       @user_education = Education.where('"UserID" = ? and "Private" = ?', params[:id],"1")
       @user_communication = Communication.where('"UserID" = ? and "Private" = ?',params[:id],"1")
