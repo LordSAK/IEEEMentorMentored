@@ -457,6 +457,7 @@
 <h2 class="subtitle">
     Advanced
 </h2>
+            
 <table align="center" width="100%" >
       <tr>
          <td align="center" width="34%" style="font-size: x-large; color: Gray;">
@@ -487,14 +488,25 @@
             <%= label(:label2, "Show these details in search result", {}, { :class => "labelTo" }) %>
             <br />
             <table>
+                <% if @user_basic.Private.to_s == "1" %>
                 <tr>
                     <td>
-                        <label class="checkbox inline">
-                            <%= check_box(:ChkBx_Location,{:id => "ChkBx_Location",:value => "Location"}) %>
+                        <label class="checkbox inline">     
+                            <input type="checkbox" name="settings[ChkBx_Location]" id="settings[ChkBx_Location]" value="1" checked = "checked">
                             Location
                         </label>
                     </td>
                 </tr>
+                <% else %>
+                <tr>
+                    <td>
+                        <label class="checkbox inline">     
+                            <input type="checkbox" name="settings[ChkBx_Location]" id="settings[ChkBx_Location]">
+                            Location
+                        </label>
+                    </td>
+                </tr>
+                <% end %>
             </table>
             <table >
                 <% if @user_profession.blank? %>
@@ -522,8 +534,7 @@
                                 </label>
                              <% end %>
                             </td>
-                        </tr>
-                    
+                        </tr> 
                 <% end %>
             </table>
             <table >
@@ -565,110 +576,110 @@
                 <% twitter = 0 %>
                 <% @user_communication.each do |c| %>
                     <% if c.CommunicationMode == "Phone" and c.Private.to_s == "1" %>
-                <tr>
-                    <% phone = 1 %>
-                    <td>
-                        <label class="checkbox inline">
-                            <input type="checkbox" name="ChkBx_Phone" id="ChkBx_Phone" value="1" checked = "checked">
-                            Phone
-                        </label>
-                    </td>
-                </tr>
-                     <% end %>
-                     <% if c.CommunicationMode == "Email" and c.Private.to_s == "1" %>
-                <tr>
-                    <% email = 1 %>
-                    <td>
-                        <label class="checkbox inline">
-                            <input type="checkbox" name="ChkBx_Email" id="ChkBx_Email" value="1" checked = "checked">
-                            Email
-                        </label>
-                    </td>
-                </tr>
+                        <tr>
+                            <% phone = 1 %>
+                            <td>
+                                <label class="checkbox inline">
+                                        <input type="checkbox" name="settings[ChkBx_Phone]" id="settings[ChkBx_Phone]" value="1" checked = "checked">
+                                         Phone
+                                </label>
+                            </td>
+                        </tr>
+                    <% end %>
+                    <% if c.CommunicationMode == "Email" and c.Private.to_s == "1" %>
+                        <tr>
+                            <% email = 1 %>
+                            <td>
+                                <label class="checkbox inline">
+                                   <input type="checkbox" name="settings[ChkBx_Email]" id="settings[ChkBx_Email]" value="1" checked = "checked">
+                                        Email
+                                </label>
+                            </td>
+                        </tr>
                     <% end %>
                     <% if c.CommunicationMode == "Skype" and c.Private.to_s == "1" %>
-                <tr>
-                    <% skype = 1 %>
-                    <td>
-                        <label class="checkbox inline">
-                            <input type="checkbox" name="ChkBx_Skype" id="ChkBx_Skype" value="1" checked = "checked">
-                            Skype
-                        </label>
-                    </td>
-                </tr>
+                        <tr>
+                            <% skype = 1 %>
+                            <td>
+                                <label class="checkbox inline">
+                                   <input type="checkbox" name="settings[ChkBx_Skype]" id="settings[ChkBx_Skype]" value="1" checked = "checked">
+                                        Skype
+                                </label>
+                            </td>
+                        </tr>
                     <% end %>
                     <% if c.CommunicationMode == "Website" and c.Private.to_s == "1" %>
-                <tr>
-                    <% website = 1 %>
-                    <td>
-                        <label class="checkbox inline">
-                            <input type="checkbox" name="ChkBx_Website" id="ChkBx_Website" value="1" checked = "checked">
-                            Website
-                        </label>
-                    </td>
-                </tr>
+                        <tr>
+                            <% website = 1 %>
+                            <td>
+                                <label class="checkbox inline">
+                                    <input type="checkbox" name="settings[ChkBx_Website]" id="settings[ChkBx_Website]" value="1" checked = "checked">
+                                        Website
+                                </label>
+                            </td>
+                        </tr>
                     <% end %>
                     <% if c.CommunicationMode == "Twitter" and c.Private.to_s == "1" %>
-                    <tr>
-                        <% twitter = 1 %>
-                        <td>
+                        <tr>
+                            <% twitter = 1 %>
+                            <td>
                             <label class="checkbox inline">
-                                <input type="checkbox" name="ChkBx_Twitter" id="ChkBx_Twitter" value="1" checked = "checked">
-                                Twitter
+                                    <input type="checkbox" name="settings[ChkBx_Twitter]" id="settings[ChkBx_Twitter]" value="1" checked = "checked">
+                                    Twitter
                             </label>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     <% end %>
-                    <% end %>
+                <% end %>
                     <% if phone == 0 %>
-                    <tr>
-                        <td>
-                            <label class="checkbox inline">
-                                <%= check_box_tag 'ChkBx_Phone' %>
-                                Phone
-                            </label>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <label class="checkbox inline">
+                                        <input type="checkbox" name="settings[ChkBx_Phone]" id="settings[ChkBx_Phone]">
+                                         Phone
+                                </label>
+                            </td>
+                        </tr>
                     <% end %>
                     <% if email == 0 %>
-                    <tr>
-                        <td>
-                            <label class="checkbox inline">
-                                <%= check_box_tag 'ChkBx_Email' %>
-                                Email
-                            </label>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <label class="checkbox inline">
+                                   <input type="checkbox" name="settings[ChkBx_Email]" id="settings[ChkBx_Email]">
+                                        Email
+                                </label>
+                            </td>
+                        </tr>
                     <% end %>
                     <% if skype == 0 %>
-                    <tr>
-                        <td>
-                            <label class="checkbox inline">
-                                <%= check_box_tag 'ChkBx_Skype' %>
-                                <%= label(:lb_Skype, "Skype") %>
-                            </label>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <label class="checkbox inline">
+                                   <input type="checkbox" name="settings[ChkBx_Skype]" id="settings[ChkBx_Skype]">
+                                        Skype
+                                </label>
+                            </td>
+                        </tr>
                     <% end %>
                     <% if website == 0 %>
-                    <tr>
-                        <td>
-                            <label class="checkbox inline">
-                                <%= check_box_tag 'ChkBx_Website' %>
-                                Website
-                            </label>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <label class="checkbox inline">
+                                    <input type="checkbox" name="settings[ChkBx_Website]" id="settings[ChkBx_Website]">
+                                        Website
+                                </label>
+                            </td>
+                        </tr>
                     <% end %>
                     <% if twitter == 0 %>
-                    <tr>
-                        <td>
-                            <label class="checkbox inline">
-                                <%= check_box_tag 'ChkBx_Twitter' %>
-                                Twitter
+                        <tr>
+                            <td>
+                                <label class="checkbox inline">
+                                    <input type="checkbox" name="settings[ChkBx_Twitter]" id="settings[ChkBx_Twitter]">
+                                    Twitter
                             </label>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
                     <% end %>
             </table>
          </td>

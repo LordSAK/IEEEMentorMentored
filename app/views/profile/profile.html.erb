@@ -107,6 +107,7 @@
         </td>
         <td width="60%" style="background-color:#00BFFF;font-size: large">
             <table style="color:white;">
+                <% if @user_private == "1" %>
                 <tr>
                     <td>
                         <% if !@user.user_City.nil? %>
@@ -129,7 +130,9 @@
                         
                         <% end %>
                     </td>
-                </tr> 
+                </tr>
+                <% else %>
+                <% end %> 
             </table>
         </td>
     </tr>

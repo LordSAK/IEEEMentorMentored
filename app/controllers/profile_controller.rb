@@ -6,6 +6,7 @@ class ProfileController < ApplicationController
   	if params[:id].nil?
   		 @user_id=current_user.id
   		 @user=User.find(@user_id)
+       @user_private = "1"
   	   @user_education = Education.where(:UserID => current_user.id)
        @user_communication = Communication.where(:UserID => current_user.id)
        @user_profession = Profession.where(:UserID => current_user.id)
@@ -13,6 +14,7 @@ class ProfileController < ApplicationController
   	else
   		 @user_id= params[:id]
        @user=User.find(@user_id)
+       @user_private = @user.Private.to_s
        @user_education = Education.where('"UserID" = ? and "Private" = ?', params[:id],"1")
        @user_communication = Communication.where('"UserID" = ? and "Private" = ?',params[:id],"1")
        @user_profession = Profession.where('"UserID" =  ? and "Private" = ?',params[:id],"1")
