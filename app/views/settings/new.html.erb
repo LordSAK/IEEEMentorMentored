@@ -488,7 +488,7 @@
             <%= label(:label2, "Show these details in search result", {}, { :class => "labelTo" }) %>
             <br />
             <table>
-                <% if @user_basic.any? %>
+                <% if @user_basic.empty? %>
                     <% if @user_basic.Private.to_s == "1" %>
                         <tr>
                             <td>
