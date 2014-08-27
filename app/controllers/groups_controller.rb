@@ -42,7 +42,7 @@ class GroupsController < ApplicationController
   def search
     keyword=params[:tf_keyword] unless params[:tf_keyword]==""
     if !keyword.nil?
-      @groups=Group.where("? is null or groups.name ILIKE ? or ? is null or groups.description ILIKE ?","%#{keyword}%","%#{keyword}%","%#{keyword}%","%#{keyword}%")
+      @groups=Group.where("? is null or groups.name LIKE ? or ? is null or groups.description LIKE ?","%#{keyword}%","%#{keyword}%","%#{keyword}%","%#{keyword}%")
     end
   end
 

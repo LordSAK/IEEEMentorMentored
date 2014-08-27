@@ -30,12 +30,14 @@ class InternshipsController < ApplicationController
   end
 
   def upload
+    if !params[:internships][:file].nil?
     s=params[:internships][:file]
-    File.open(Rails.root.join('public', 'resume', s.original_filename.to_s.split('.')[0]+""+current_user.id.to_s+"."+s.original_filename.to_s.split('.')[1]), 'wb') do |file|
-      file.write(s.read)
-      path="/resume/"+ s.original_filename.to_s.split('.')[0]+""+current_user.id.to_s+"."+s.original_filename.to_s.split('.')[1]
-      @applicant=InternUser.new(:resume_path => path, :internship_id => params[:id],:ApplicantID => current_user.id)
-      @applicant.save
+      File.open(Rails.root.join('public', 'resume', s.original_filename.to_s.split('.')[0]+""+current_user.id.to_s+"."+s.original_filename.to_s.split('.')[1]), 'wb') do |file|
+        file.write(s.read)
+        path="/resume/"+ s.original_filename.to_s.split('.')[0]+""+current_user.id.to_s+"."+s.original_filename.to_s.split('.')[1]
+        @applicant=InternUser.new(:resume_path => path, :internship_id => params[:id],:ApplicantID => current_user.id)
+        @applicant.save
+      end
     end
     redirect_to internships_path
   end
