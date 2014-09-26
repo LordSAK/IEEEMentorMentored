@@ -37,6 +37,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to the Mentor Mentored!"
       redirect_to '/availabilities'
     else
+      @InterestAreas=Interest.order("id asc").all
       render 'new'
     end
   end
@@ -52,6 +53,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to the Mentor Mentored!"
       redirect_to '/availabilities'
     else
+      @InterestAreas=Interest.order("id asc").all
       render 'new1'
     end
   end
