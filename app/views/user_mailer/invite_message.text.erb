@@ -1,0 +1,16 @@
+<% if @user.Account == "company" %>
+    <% if @user.Selector=="Company Name" %>
+    	<% names=@user.CompanyName %>
+    <% else %>
+    	<% names=@user.AlternateName %>
+    <% end %>
+<% else %>
+    <% names=@user.First_Name %>
+    <% if !@user.Last_Name.blank? %>
+        <% names+= " " +@user.Last_Name %>
+    <% end %> 
+<% end %>
+You are invited to Mentor Mentored from <%= names %>. 
+To sign up please click on following link:
+
+localhost:3000/signup

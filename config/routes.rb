@@ -61,6 +61,7 @@ IEEEMentorMentored::Application.routes.draw do
   #match '/static_pages', to: 'static_pages#create', via: :post, as: '/accept'
   match '/sentrequest', to: 'static_pages#request_I_have_sent', via: 'get'
   match '/connection', to: 'static_pages#connections', via: 'get'
+  match '/invites', to: 'static_pages#invites',via: 'post'
   match '/setting', to: 'settings#reset_password', :via => :post
   match '/deleteaccount', to: 'settings#delete_my_account', :via => :post
 

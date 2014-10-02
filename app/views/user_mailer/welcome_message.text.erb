@@ -1,0 +1,14 @@
+Welcome to Mentor Mentored
+<% if @user.Account == "company" %>
+    <% if @user.Selector=="Company Name" %>
+    	<% names=@user.CompanyName %>
+    <% else %>
+    	<% names=@user.AlternateName %>
+    <% end %>
+<% else %>
+    <% names=@user.First_Name %>
+    <% if !@user.Last_Name.blank? %>
+        <% names+= " " +@user.Last_Name %>
+    <% end %> 
+<% end %>
+<%= names %>

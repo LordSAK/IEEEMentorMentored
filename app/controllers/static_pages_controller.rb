@@ -45,4 +45,17 @@ class StaticPagesController < ApplicationController
   def connections
   	@user = Userrequest.select('"RequestFrom"').where('"RequestTo" = ? AND "IsApproved" = ?', current_user.id, "1")
   end
+
+  def invites
+    invites=params[:Emails]
+    if invites.include? ";"
+      emails=invites.split ";"
+      emails. each do |email|
+        UserMailer.invite_message(email,current_user).deliver
+      end
+    else
+      UserMailer.invite_message(invites,current_user).deliver
+    end
+    redirect_to '/default'
+  end
 end

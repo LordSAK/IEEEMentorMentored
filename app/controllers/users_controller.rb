@@ -36,6 +36,7 @@ class UsersController < ApplicationController
       sign_in @user
       flash[:success] = "Welcome to the Mentor Mentored!"
       redirect_to '/availabilities'
+      UserMailer.welcome_message(@user).deliver
     else
       @InterestAreas=Interest.order("id asc").all
       render 'new'
@@ -52,6 +53,7 @@ class UsersController < ApplicationController
       sign_in @user
       flash[:success] = "Welcome to the Mentor Mentored!"
       redirect_to '/availabilities'
+      UserMailer.welcome_message(@user).deliver
     else
       @InterestAreas=Interest.order("id asc").all
       render 'new1'

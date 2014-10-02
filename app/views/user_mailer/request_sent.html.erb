@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1></h1>
+    <p>
+      <% if @user.Account == "company" %>
+        <% if @user.Selector=="Company Name" %>
+          <% names=@user.CompanyName %>
+        <% else %>
+          <% names=@user.AlternateName %>
+        <% end %>
+      <% else %>
+        <% names=@user.First_Name %>
+        <% if !@user.Last_Name.blank? %>
+          <% names+= " " +@user.Last_Name %>
+        <% end %> 
+      <% end %>
+      You have got a connection request from <%= names %>.<br>
+    </p>
+    <p>
+    </p>
+  </body>
+</html>
