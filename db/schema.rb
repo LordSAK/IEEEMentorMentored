@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140825110941) do
+ActiveRecord::Schema.define(version: 20141003114840) do
 
   create_table "availabilities", force: true do |t|
     t.integer  "UserID"
@@ -96,6 +96,12 @@ ActiveRecord::Schema.define(version: 20140825110941) do
     t.datetime "updated_at"
   end
 
+  create_table "partnerships", force: true do |t|
+    t.string   "partnership"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "professions", force: true do |t|
     t.integer  "UserID",      limit: 255
     t.string   "Designation"
@@ -109,6 +115,13 @@ ActiveRecord::Schema.define(version: 20140825110941) do
 
   create_table "societies", force: true do |t|
     t.string   "IEEESocieties"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_partnerships", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "parternshipvalue"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -44,8 +44,7 @@
           </tr>
           <tr>
             <td align="center">
-              <%= select_tag 'partnership', options_from_collection_for_select(@Partnerships, 'id', 'Partnership'),{ :prompt => '
-Mentoring Partnership' } %>
+              <%= select_tag 'partnership', options_from_collection_for_select(@Partnerships, 'id', 'partnership'),{:multiple => true, :size => 5} %>
             </td>
           </tr>
           <tr>

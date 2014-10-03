@@ -13,7 +13,8 @@ class SearchController < ApplicationController
     @InterestAreas=Interest.all
     @Societies=Societies.all
     @work_sector=WorkSector.all
-    @Partnerships=MentoringPartnership.all
+    #@Partnerships=MentoringPartnership.all
+    @Partnerships=Partnership.all
       
     
     #zip 
@@ -70,10 +71,15 @@ class SearchController < ApplicationController
     if zip.nil? and interest.nil? and societies.nil? and sector.nil? and partner.nil? and desig.nil? and company.nil?
 
 
-    elsif desig.nil? and company.nil?
-      @user = User.find(:all, :conditions => ['(? is null or "users"."user_Zip" = ?) AND ((?) is null or "users"."interest" in (?)) AND (? is null or "users"."societies" = ?) AND (? is null or "users"."sector" = ?) AND (? is null or "users"."partnership" =?) AND "users"."id" != ?', zip,zip,interest,interest,societies,societies,sector,sector,partner,partner,current_user.id])
+    elsif desig.nil? and company.nil? and partner.nil?
+      @user = User.find(:all, :conditions => ['(? is null or "users"."user_Zip" = ?) AND ((?) is null or "users"."interest" in (?)) AND (? is null or "users"."societies" = ?) AND (? is null or "users"."sector" = ?) AND "users"."id" != ?', zip,zip,interest,interest,societies,societies,sector,sector,current_user.id])
     else
-      @user_join = Profession.joins(:user).where('(? is null or "users"."user_Zip" = ?) AND (? is null or "users"."interest" = ?) AND (? is null or "users"."societies" = ?) AND (? is null or "users"."sector" = ?) AND (? is null or "users"."partnership" =?) AND (? is null or "professions"."Designation"= ?) AND  (? is null or "professions"."Company"= ?) AND "professions"."UserID" != ?', zip,zip,interest,interest,societies,societies,sector,sector,partner,partner,desig,desig,company,company, current_user.id)
+      if partner.nil?
+        @user_join = Profession.joins("inner join users on users.id=professions.UserID inner join user_partnerships on users.id=user_partnerships.user_id").where('(? is null or "users"."user_Zip" = ?) AND (? is null or "users"."interest" = ?) AND (? is null or "users"."societies" = ?) AND (? is null or "users"."sector" = ?) AND (? is null or "professions"."Designation"= ?) AND  (? is null or "professions"."Company"= ?) AND "professions"."UserID" != ?', zip,zip,interest,interest,societies,societies,sector,sector,desig,desig,company,company, current_user.id)
+      else
+        @user_join = Profession.joins("inner join users on users.id=professions.UserID inner join user_partnerships on users.id=user_partnerships.user_id").where('(? is null or "users"."user_Zip" = ?) AND (? is null or "users"."interest" = ?) AND (? is null or "users"."societies" = ?) AND (? is null or "users"."sector" = ?) AND ( "users"."partnership"  IN 
+          (?)) AND (? is null or "professions"."Designation"= ?) AND  (? is null or "professions"."Company"= ?) AND "professions"."UserID" != ?', zip,zip,interest,interest,societies,societies,sector,sector,partner,desig,desig,company,company, current_user.id)
+      end
     end
        
   	#end   	

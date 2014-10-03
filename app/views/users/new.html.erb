@@ -184,10 +184,15 @@
         </label>
       </td>
       <td >
-          <%= f.select(:partnership,options_from_collection_for_select(@Partnerships, "id", "Partnership"), :include_blank => true,:id => "DDL_Students",:style => "margin-top: 10px") %>
+         <%= select_tag 'partnership', options_from_collection_for_select(@Partnerships, 'id', 'partnership'),{:multiple => true, :size => 5} %>
+          <br/>
+          <label style="font-size:x-small;color:red">
+            Hold 'ctrl' to input multiple values
+          </label>
       </td>
     </tr>  
   </table>
+
   <br/>
   <table align="center" width="100%">
     <tr>

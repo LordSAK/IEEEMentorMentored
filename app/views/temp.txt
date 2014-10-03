@@ -177,3 +177,38 @@
     </tr>
 </table>
 ########################<!--settings network-->#####################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sign up old mentoring partnership
+
+
+
+<%= f.select(:partnership,options_from_collection_for_select(@Partnerships, "id", "Partnership"), :include_blank => true,:id => "DDL_Students",:style => "margin-top: 10px") %>
+
+
+
+
+
+
+
+
+search page
+
+<%= select_tag 'partnership', options_from_collection_for_select(@Partnerships, 'id', 'Partnership'),{ :prompt => '
+Mentoring Partnership' } %>

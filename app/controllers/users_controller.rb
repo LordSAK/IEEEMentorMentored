@@ -14,7 +14,8 @@ class UsersController < ApplicationController
     @InterestAreas=Interest.order("id asc").all
     @Societies=Societies.all
     @work_sector=WorkSector.all
-    @Partnerships=MentoringPartnership.all
+    #@Partnerships=MentoringPartnership.all
+    @Partnerships=Partnership.all
     @user = User.new
   end
 
@@ -22,7 +23,8 @@ class UsersController < ApplicationController
     @InterestAreas=Interest.order("id asc").all
     @Societies=Societies.all
     @work_sector=WorkSector.all
-    @Partnerships=MentoringPartnership.all
+    #@Partnerships=MentoringPartnership.all
+    @Partnerships=Partnership.all
     @user1 = User.new
   end
 
@@ -33,12 +35,23 @@ class UsersController < ApplicationController
     @user = User.new(user_params)    # Not the final implementation!
     if @user.save
       @user.update_attribute(:Account,"normal")
+      partnershipValues=params[:partnership]
+      print partnershipValues
+      partnershipValues.each do |pv|
+        print "\n\n\n\n\n"+pv
+        @partnership=UserPartnership.new(:user_id=> @user.id,:parternshipvalue => pv)
+        @partnership.save
+      end
       sign_in @user
       flash[:success] = "Welcome to the Mentor Mentored!"
       redirect_to '/availabilities'
       UserMailer.welcome_message(@user).deliver
     else
       @InterestAreas=Interest.order("id asc").all
+      @Societies=Societies.all
+    @work_sector=WorkSector.all
+    #@Partnerships=MentoringPartnership.all
+    @Partnerships=Partnership.all
       render 'new'
     end
   end
