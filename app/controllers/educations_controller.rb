@@ -5,13 +5,14 @@ before_action :signed_in_user, only: [:create, :destroy]
   end
 
   def create
-  	if !params[:Educations][:tf_Degree].blank? && params[:Educations][:tf_Degree] != "Degree"
+  	if !params[:Educations][:University].blank?
   	 @UniversityID = params[:Educations][:University]
      @chapter=params[:Educations][:chapter]
   	 @From = params[:Educations][:fromyear]
   	 @To = params[:Educations][:toyear]
   	 @Education = Education.new( :UserID => current_user.id, :Chapter => @chapter ,:UniversityID => @UniversityID, :SchoolFrom => @From, :SchoolTo => @To, :Private => "0" )
   	 @Education = @Education.save
+     print "\n\n\n\n\nsaved"
   	end
     if !params[:parametersSch].blank?
       params[:parametersSch].each do |keydeg, degree|
