@@ -7,6 +7,8 @@ class SettingsController < ApplicationController
     @students=Students.all
     @entrepreneurs=Entrepreneurs.all
     @veterans=Veterans.all
+    @Chapters=Chapter.all
+    @Universites=University.all
     
     
     @user_basic.update_attribute( :interest, params[:settings][:interest])
@@ -285,6 +287,8 @@ class SettingsController < ApplicationController
     @Societies=Societies.all
     @work_sector=WorkSector.all
     @Partnerships=MentoringPartnership.all
+    @Chapters=Chapter.all
+    @Universites=University.all
   end
 
   def index

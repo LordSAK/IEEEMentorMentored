@@ -232,3 +232,16 @@ from education page
         input2 += "<option text='" +<%= u.University %>+ "' value='" + <%= u.id %> + "'>" + <%= u.University %> + "</option>";
      <% end %>  
      input2+="</select>"; 
+
+
+
+
+
+
+
+
+
+
+     ###############education in settingss########################
+
+                                             <!--<input type="text" name="tf_education[<%= i %>]" value="<%= user_ed.SchoolName %>" style="width:100px">-->

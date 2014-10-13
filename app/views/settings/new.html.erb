@@ -251,7 +251,13 @@
                                 </script>
                                   <tr> 
                                      <td align="center">
-                                        <input type="text" name="tf_education[<%= i %>]" value="<%= user_ed.SchoolName %>" style="width:100px"><br/>
+
+                                        <%= select_tag :chapter,options_from_collection_for_select(@Chapters, "id", "Chapter",user_ed.Chapter), :include_blank => "Chapter",:id => "DDL_Students",:style => "margin-top: 10px;width:100px" %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <%= f.select :University,options_from_collection_for_select(@Universites, "id", "University",user_ed.UniversityID), :include_blank => "University",:id => "DDL_Students",:style => "margin-top: 10px;width:100px" %>
                                      </td>
                                   </tr>
                                   <tr>
@@ -562,13 +568,13 @@
                     
                         <tr>
                             <td>
-                            <% if !@user_education.first.SchoolName.blank? and @user_education.first.Private.to_s == "1" %>
+                            <% if !@user_education.first.UniversityID.blank? and @user_education.first.Private.to_s == "1" %>
                                 <label class="checkbox inline">
                                     <input type="checkbox" name="ChkBx_Education"
                                     id="ChkBx_Education" value="1" checked = "checked">
                                     Education
                                 </label>
-                            <% elsif !@user_education.first.SchoolName.blank? and @user_education.first.Private.to_s == "0" %>
+                            <% elsif !@user_education.first.UniversityID.blank? and @user_education.first.Private.to_s == "0" %>
                                 <label class="checkbox inline">
                                     <%= check_box_tag 'ChkBx_Education' %>
                                     Education
