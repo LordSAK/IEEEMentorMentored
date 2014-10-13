@@ -24,18 +24,19 @@
         </td>
         <td width="60%" style="background-color:#00BFFF;font-size: large">
             <% @user_education.each do |user_edu| %>
-            
-            <table style="color:white;">
-                <tr>
-                    <td>
-	                    <%=  user_edu.SchoolName %>
-                    </td>
-                    <td>
-                        &nbsp;&nbsp;Class of <%= user_edu.SchoolFrom %>
-                    </td>
-                </tr>
-            </table>
-            
+                <% @univ=University.where("id = ?",user_edu.UniversityID) %>
+                <% @univ.each do |u| %>
+                    <table style="color:white;">
+                        <tr>
+                            <td>
+	                           <%= u.University %>
+                            </td>
+                            <td>
+                                &nbsp;&nbsp;Class of <%= user_edu.SchoolFrom %>
+                            </td>
+                        </tr>
+                    </table>
+                <% end %>            
             <% end %>
         </td>
     </tr>
