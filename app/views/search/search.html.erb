@@ -49,6 +49,11 @@
           </tr>
           <tr>
             <td align="center">
+              <%= select_tag('university', options_from_collection_for_select(@universities, 'id', 'University'),{:prompt => "University"}) %>
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
               <%= text_field_tag "tf_Designation",nil,:placeholder =>'Designation' %>
             </td>
           </tr>

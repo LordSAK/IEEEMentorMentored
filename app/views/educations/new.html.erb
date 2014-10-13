@@ -3,7 +3,8 @@
 
      $(document).ready(function() {
         //$("input[value='Add']").click(function(e)    {
-          $("#AddSch").click(function() {  
+          $("#AddSch").click(function() { 
+            alert("sak"); 
             //e.preventDefault();
             var hidval = $('#valEdu').val();
             if(hidval == 0)
@@ -52,8 +53,8 @@
                 DDL_ToProfession += "</select>";
 
      var input1 = "<input name='parametersSch["+ updated_row_num +"]' id='field' type='text' placeholder='Degree' style='text-align:center;'  />"
-                var newRow = "<tr><td align='center' style='font-size: x-large; color: #212121;' height='35px'>"
-                + input1 + "</td></tr>";
+
+      var newRow = "<tr><td align='center' style='font-size: x-large; color: #212121;' height='35px'>" + input1 + " <%= select_tag('university', options_from_collection_for_select(@Universites, 'id', 'University'),{:prompt => 'University'}) %></td></tr>";
 
      
 var controls = "<tr><td>"+ DDL_fromProfession + " To "+DDL_ToProfession+ "</td></tr>";
@@ -107,7 +108,9 @@ var control = "<tr><td align='center'><button type='button' class='btn_rmv'>Remo
 <table width="100%">
       <tr style = "text-align:center;">
          <td>
-            <%= f.text_field :tf_Degree,placeholder: "Degree", :style => "text-align:center;" %>
+            <%= f.select :chapter,options_from_collection_for_select(@Chapters, "id", "Chapter"), :include_blank => "Chapter",:id => "DDL_Students",:style => "margin-top: 10px" %>
+            
+            <%= f.select :University,options_from_collection_for_select(@Universites, "id", "University"), :include_blank => "University",:id => "DDL_Students",:style => "margin-top: 10px" %>
          </td>
       </tr>
       <tr style = "text-align:center;">
@@ -123,7 +126,7 @@ var control = "<tr><td align='center'><button type='button' class='btn_rmv'>Remo
             <table id="Controls">
             </table>
             
-            <div><input id="AddSch" value="Add" type="submit" /></div>
+            <div><input id="AddSch" value="Add" type="button" /></div>
             <input id="valEdu" type="hidden" value="0" />
             
          </td>

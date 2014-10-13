@@ -6,10 +6,11 @@ before_action :signed_in_user, only: [:create, :destroy]
 
   def create
   	if !params[:Educations][:tf_Degree].blank? && params[:Educations][:tf_Degree] != "Degree"
-  	 @Degree = params[:Educations][:tf_Degree]
+  	 @UniversityID = params[:Educations][:University]
+     @chapter=params[:Educations][:chapter]
   	 @From = params[:Educations][:fromyear]
   	 @To = params[:Educations][:toyear]
-  	 @Education = Education.new( :UserID => current_user.id, :SchoolName => @Degree, :SchoolFrom => @From, :SchoolTo => @To, :Private => "0" )
+  	 @Education = Education.new( :UserID => current_user.id, :Chapter => @chapter ,:UniversityID => @UniversityID, :SchoolFrom => @From, :SchoolTo => @To, :Private => "0" )
   	 @Education = @Education.save
   	end
     if !params[:parametersSch].blank?
@@ -27,7 +28,7 @@ before_action :signed_in_user, only: [:create, :destroy]
               @to=to          
             end
           end
-          @Education = Education.new( :UserID => current_user.id, :SchoolName => @degree, :SchoolFrom => @from, :SchoolTo => @to, :Private => "0")
+          @Education = Education.new( :UserID => current_user.id, :Chapter => @chapter ,:UniversityID => @UniversityID, :SchoolFrom => @from, :SchoolTo => @to, :Private => "0")
           @Education.save
         end
       end
@@ -40,5 +41,7 @@ before_action :signed_in_user, only: [:create, :destroy]
 
   def new
   	@Education = Education.new
+    @Chapters=Chapter.all
+    @Universites=University.all
   end
 end

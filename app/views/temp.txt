@@ -212,3 +212,23 @@ search page
 
 <%= select_tag 'partnership', options_from_collection_for_select(@Partnerships, 'id', 'Partnership'),{ :prompt => '
 Mentoring Partnership' } %>
+
+
+from education page
+
+<%= f.text_field :tf_Degree,placeholder: "Degree", :style => "text-align:center;" %>
+
+
+
+
+
+
+
+
+
+     var input2="";
+     input2 = "<select name='parameterUniversity["+ updated_row_num +"]' id='ddl_university'>";
+     <% @Universites.each_with_index do |u| %>
+        input2 += "<option text='" +<%= u.University %>+ "' value='" + <%= u.id %> + "'>" + <%= u.University %> + "</option>";
+     <% end %>  
+     input2+="</select>"; 

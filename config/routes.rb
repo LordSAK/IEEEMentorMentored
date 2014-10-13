@@ -31,7 +31,7 @@ IEEEMentorMentored::Application.routes.draw do
   resources :internships
   #resources :search, only: [:search, :create]
 
-  root "static_pages#home"
+  root "static_pages#home1"
   match '/signup', to: 'users#new', via: 'get'
   match '/signup_company', to: 'users#new1', via: 'get'
   match 'signup_create1',to: 'users#create1',via: 'post'

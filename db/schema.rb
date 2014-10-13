@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141003114840) do
+ActiveRecord::Schema.define(version: 20141010103335) do
 
   create_table "availabilities", force: true do |t|
     t.integer  "UserID"
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 20141003114840) do
   end
 
   add_index "availabilities", ["UserID", "created_at"], name: "index_availabilities_on_UserID_and_created_at"
+
+  create_table "chapters", force: true do |t|
+    t.string   "Chapter"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "communications", force: true do |t|
     t.integer  "UserID"
@@ -41,13 +47,14 @@ ActiveRecord::Schema.define(version: 20141003114840) do
   end
 
   create_table "educations", force: true do |t|
-    t.integer  "UserID",     limit: 255
-    t.string   "SchoolName"
+    t.integer  "UserID",       limit: 255
+    t.integer  "UniversityID", limit: 255
     t.string   "SchoolFrom"
     t.string   "SchoolTo"
     t.string   "Private"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "Chapter"
   end
 
   create_table "group_users", force: true do |t|
@@ -115,6 +122,12 @@ ActiveRecord::Schema.define(version: 20141003114840) do
 
   create_table "societies", force: true do |t|
     t.string   "IEEESocieties"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "universities", force: true do |t|
+    t.string   "University"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
