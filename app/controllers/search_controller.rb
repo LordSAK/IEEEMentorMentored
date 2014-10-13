@@ -75,11 +75,14 @@ class SearchController < ApplicationController
 
 
     elsif desig.nil? and company.nil? and partner.nil? and university.nil?
+      print "\n\n\n\n\n\n\n\n inside simple search\n\n\n"
       @user = User.find(:all, :conditions => ['(? is null or "users"."user_Zip" = ?) AND ((?) is null or "users"."interest" in (?)) AND (? is null or "users"."societies" = ?) AND (? is null or "users"."sector" = ?) AND "users"."id" != ?', zip,zip,interest,interest,societies,societies,sector,sector,current_user.id])
     else
       if partner.nil?
-        @user_join = Profession.joins('inner join "users" on "users"."id"="professions"."UserID" inner join "user_partnerships" on "users"."id"="user_partnerships"."user_id" inner join "educations" on "educations"."UserID"="users"."id"').where('(? is null or "users"."user_Zip" = ?) AND (? is null or "users"."interest" = ?) AND (? is null or "users"."societies" = ?) AND (? is null or "users"."sector" = ?) AND (? is null or "professions"."Designation"= ?) AND  (? is null or "professions"."Company"= ?) AND (? is null or "educations"."UniversityID"=?) AND "professions"."UserID" != ?', zip,zip,interest,interest,societies,societies,sector,sector,desig,desig,company,company,university,university, current_user.id)
+        print "\n\n\n\n\n\n\n\n inside first join \n\n\n"
+        @user_join = Profession.joins('inner join "users" on "users"."id"="professions"."UserID" inner join "educations" on "educations"."UserID"="users"."id"').where('(? is null or "users"."user_Zip" = ?) AND (? is null or "users"."interest" = ?) AND (? is null or "users"."societies" = ?) AND (? is null or "users"."sector" = ?) AND (? is null or "professions"."Designation"= ?) AND  (? is null or "professions"."Company"= ?) AND (? is null or "educations"."UniversityID"=?) AND "professions"."UserID" != ?', zip,zip,interest,interest,societies,societies,sector,sector,desig,desig,company,company,university,university, current_user.id).group(:id)
       else
+        print "\n\n\n\n\n\n\n\n inside second join \n\n\n"
         @user_join = Profession.joins('inner join "users" on "users"."id"="professions"."UserID" inner join "user_partnerships" on "users"."id"="user_partnerships"."user_id" inner join "educations" on "educations"."UserID"="users"."id"').where('(? is null or "users"."user_Zip" = ?) AND (? is null or "users"."interest" = ?) AND (? is null or "users"."societies" = ?) AND (? is null or "users"."sector" = ?) AND ( "users"."partnership"  IN 
           (?)) AND (? is null or "professions"."Designation"= ?) AND  (? is null or "professions"."Company"= ?) AND (? is null or "educations"."UniversityID"=?) AND "professions"."UserID" != ?', zip,zip,interest,interest,societies,societies,sector,sector,partner,desig,desig,company,company,university,university, current_user.id)
       end
