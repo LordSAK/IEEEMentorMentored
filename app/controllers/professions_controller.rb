@@ -20,6 +20,7 @@ before_action :signed_in_user, only: [:create, :destroy]
         if !designation.nil?
           @designation = designation
           puts @designation
+          
           params[:parametersCompany].each do |keycompany, company|
             if keydesignation == keycompany
               @company = company

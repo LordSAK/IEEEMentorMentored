@@ -99,10 +99,16 @@ class SettingsController < ApplicationController
   #  @blah2 = params[:ChkBx_Education]
   #if params[:ChkBx_Education].to_s == "1"
     Education.delete_all(:UserID => current_user.id)
-    if !params[:tf_education].blank?
-        params[:tf_education].each do |keydeg, degree|
+    if !params[:ddl_University].blank?
+        params[:ddl_University].each do |keydeg, degree|
         if !degree.nil?
           @degree=degree
+
+          params[:ddl_Chapter].each do |keychap, chap|
+            if keydeg==keychap
+              @chap=chap
+            end
+          end
           params[:tf_fromeducation].each do |keyfrom, from|
             if keydeg== keyfrom
               @from=from
@@ -114,16 +120,23 @@ class SettingsController < ApplicationController
               @to=to          
             end
           end
-        @Education = Education.new( :UserID => current_user.id, :SchoolName => @degree, :SchoolFrom => @from, :SchoolTo => @to )
+        @Education = Education.new( :UserID => current_user.id,:Chapter => @chap ,:UniversityID => @degree, :SchoolFrom => @from, :SchoolTo => @to )
         @Education.save
       end
     end
   end
     
-    if !params[:parametersSch].blank?
-    params[:parametersSch].each do |keydeg, degree|
+    if !params[:parameterUniversity].blank?
+    params[:parameterUniversity].each do |keydeg, degree|
       if !degree.nil?
         @degree=degree
+
+        params[:parametersChapter].each do |keychap,chap|
+            if keydeg==keychap
+              @chap=chap
+            end 
+          end
+
         params[:ParametersFromSch].each do |keyfrom, from|
           if keydeg== keyfrom
             @from=from
@@ -135,7 +148,7 @@ class SettingsController < ApplicationController
             @to=to          
           end
         end
-          @Education = Education.new( :UserID => current_user.id, :SchoolName => @degree, :SchoolFrom => @from, :SchoolTo => @to )
+          @Education = Education.new( :UserID => current_user.id, :Chapter => @chap ,:UniversityID => @degree, :SchoolFrom => @from, :SchoolTo => @to )
           @Education.save
         end
       end

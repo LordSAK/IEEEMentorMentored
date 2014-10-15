@@ -66,8 +66,22 @@
                 newRow1 += "<input type='button' class='btn_rmvsch' value='Remove'/></td></tr>";
 
 
-                var input1 = "<input name='parametersSch["+ updated_row_num +"]' id='field' type='text' style='width:100px' />"
-                var newRow = "<tr><td align='center' style='font-size: x-large; color: #212121;' >" + input1 + "</td></tr>";
+                var input1 = "<select name='parametersChapter["+ updated_row_num +"]' id='ddl_chapter' >";
+     input1+="<option text='Chapter' >Chapter</option>";
+     <% @Chapters.each do |c| %>
+          input1+= "<option text='<%= c.Chapter.strip %>' value='<%= c.id %>'><%= c.Chapter.strip %></option>";
+     <% end %>
+     input1+= "</select>";
+         var input2="";
+     input2 = "<select name='parameterUniversity["+ updated_row_num +"]' id='ddl_university'>";
+     input2+= "<option text='University' >University</option>";
+     <% @Universites.each do |u| %>
+        input2 += "<option text='<%= u.University.strip %>' value='<%= u.id %>'><%= u.University.strip %></option>";
+     <% end %>  
+     input2+="</select>"; 
+
+      var newRow = "<tr><td align='center' style='font-size: x-large; color: #212121;' height='35px'>" + input1 +" "+input2+"</td></tr>";
+
                 $('#ControlsSch').append(newRow);
                 $('#ControlsSch').append(newRow1);
 
@@ -251,13 +265,35 @@
                                 </script>
                                   <tr> 
                                      <td align="center">
+                                        
 
-                                        <%= select_tag :chapter,options_from_collection_for_select(@Chapters, "id", "Chapter",user_ed.Chapter), :include_blank => "Chapter",:id => "DDL_Students",:style => "margin-top: 10px;width:100px" %>
+                                        <select name='ddl_Chapter[<%= i %>]' id='ddl_chapter' > 
+                                            <option text='Chapter' >Chapter</option>
+                                            <% @Chapters.each do |c| %>
+                                                <% if c.id==user_ed.Chapter %>
+                                                    <option text='<%= c.Chapter.strip %>' value='<%= c.id %>' selected><%= c.Chapter.strip %></option>
+                                                <% else %>
+                                                    <option text='<%= c.Chapter.strip %>' value='<%= c.id %>'><%= c.Chapter.strip %>
+                                                    </option>
+                                                <%end%>
+                                            <% end %>
+                                        </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <%= f.select :University,options_from_collection_for_select(@Universites, "id", "University",user_ed.UniversityID), :include_blank => "University",:id => "DDL_Students",:style => "margin-top: 10px;width:100px" %>
+                                        <select name='ddl_University[<%= i %>]' id='ddl_chapter' > 
+                                            <option text='University' >University</option>
+                                            <% @Universites.each do |u| %>
+                                                <% if u.id==user_ed.UniversityID %>
+                                                    <option text='<%= u.University.strip %>' value='<%= u.id %>' selected><%= u.University.strip %>
+                                                    </option>
+                                                <% else %>
+                                                    <option text='<%= u.University.strip %>' value='<%= u.id %>'><%= u.University.strip %>
+                                                    </option>
+                                                <%end%>
+                                            <% end %>
+                                        </select>
                                      </td>
                                   </tr>
                                   <tr>

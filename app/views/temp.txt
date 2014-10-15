@@ -244,4 +244,44 @@ from education page
 
      ###############education in settingss########################
 
-                                             <!--<input type="text" name="tf_education[<%= i %>]" value="<%= user_ed.SchoolName %>" style="width:100px">-->
+    <!--<input type="text" name="tf_education[<%= i %>]" value="<%= user_ed.SchoolName %>" style="width:100px">-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                             <script type="text/javascript">
+
+
+                        var selectFrom = document.getElementById("DDL_FromProYear");
+                        var selectTo = document.getElementById("toyear");
+                        var year = new Date().getFullYear();
+                        for (var i = year; i >= 1950; --i) {
+                            var option = document.createElement('option');
+                            option.text = option.value = i;
+                            selectFrom.add(option, 0);
+
+                        }
+                        for (var i = year; i >= 1950; --i) {
+
+                            var option = document.createElement('option');
+                            if (i != year) {
+                                option.text = option.value = i;
+                            }
+                            else {
+                                option.text = option.value = "Present";
+                            }
+                            selectTo.add(option, 0);
+                        }
+   
+                    </script>

@@ -14,10 +14,17 @@ before_action :signed_in_user, only: [:create, :destroy]
   	 @Education = @Education.save
      print "\n\n\n\n\nsaved"
   	end
-    if !params[:parametersSch].blank?
-      params[:parametersSch].each do |keydeg, degree|
+    if !params[:parameterUniversity].blank?
+      params[:parameterUniversity].each do |keydeg, degree|
         if !degree.nil?
           @degree=degree
+          
+          params[:parametersChapter].each do |keychap,chap|
+            if keydeg==keychap
+              @chap=chap
+            end 
+          end
+
           params[:ParametersFromSch].each do |keyfrom, from|
             if keydeg== keyfrom
               @from=from
@@ -29,7 +36,7 @@ before_action :signed_in_user, only: [:create, :destroy]
               @to=to          
             end
           end
-          @Education = Education.new( :UserID => current_user.id, :Chapter => @chapter ,:UniversityID => @UniversityID, :SchoolFrom => @from, :SchoolTo => @to, :Private => "0")
+          @Education = Education.new( :UserID => current_user.id, :Chapter => @chap ,:UniversityID => @degree, :SchoolFrom => @from, :SchoolTo => @to, :Private => "0")
           @Education.save
         end
       end
