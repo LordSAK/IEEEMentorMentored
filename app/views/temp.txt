@@ -248,6 +248,7 @@ from education page
 
 
 
+s   <%= select_tag :chapter,options_from_collection_for_select(@Chapters, "id", "Chapter",user_ed.Chapter), :include_blank => "Chapter",:id => "DDL_Students",:style => "margin-top: 10px;width:100px" %>
 
 
 

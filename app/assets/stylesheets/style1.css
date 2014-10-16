@@ -526,3 +526,12 @@ $grayMediumLight: #eaeaea;
 .nav-tabs {
     text-align:center;
 }
+.divwidth
+{
+    background-color: #D8D8D8;
+ width:60px;
+ float: right;
+ text-align: center;
+ border: 1px solid;
+ display: inline;
+}

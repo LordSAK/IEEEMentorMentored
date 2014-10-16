@@ -12,7 +12,6 @@ before_action :signed_in_user, only: [:create, :destroy]
   	 @To = params[:Educations][:toyear]
   	 @Education = Education.new( :UserID => current_user.id, :Chapter => @chapter ,:UniversityID => @UniversityID, :SchoolFrom => @From, :SchoolTo => @To, :Private => "0" )
   	 @Education = @Education.save
-     print "\n\n\n\n\nsaved"
   	end
     if !params[:parameterUniversity].blank?
       params[:parameterUniversity].each do |keydeg, degree|

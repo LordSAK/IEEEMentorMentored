@@ -1,0 +1,121 @@
+<h1 class ="title">
+    Insights
+</h1>
+<table width="60%" style="margin: 0px auto;">
+	<tr>
+		<td>
+			Total users: <div class="divwidth" align="right"><%= @last %></div>
+		</td>
+	</tr>
+	<tr>
+        <td>
+        	&nbsp;
+        </td>
+	</tr>
+	<tr>
+		<td>
+			Number of current users: 
+			<div class="divwidth">
+			<%= @userall %></div>
+		</td>
+	</tr>
+	<tr>
+        <td>
+        	&nbsp;
+        </td>
+	</tr>
+	<tr>
+		<td>
+			Number of users that are gone from here:
+			<div class="divwidth"><%= @deleteuser %></div>
+		</td>
+	</tr>
+	<tr>
+        <td>
+        	&nbsp;
+        </td>
+	</tr>
+	<tr>
+		<td>
+			Percentage of current users: 
+			<div class="divwidth"><%= number_with_precision(@per_current_user, :precision => 3) %>%</div>
+		</td>
+	</tr>
+	<tr>
+        <td>
+        	&nbsp;
+        </td>
+	</tr>
+	<tr>
+		<td>
+			Percentage of users that are gone from here:
+			<div class="divwidth"><%= number_with_precision(@per_delete_user, :precision => 3) %>%</div>
+		</td>
+	</tr>
+	<tr>
+        <td>
+        	&nbsp;
+        </td>
+	</tr>
+	<tr>
+		<td>
+			Number of users that was came in last 24 hours: 
+			<div class="divwidth"><%= @twentyfourhours %></div>
+		</td>
+	</tr>
+	<tr>
+        <td>
+        	&nbsp;
+        </td>
+	</tr>
+	<tr>
+		<td>
+			Number of users that was came in last 7 days: 
+			<div class="divwidth"><%= @lastsevendays %>
+			</div>	
+		</td>
+	</tr>
+	<tr>
+        <td>
+        	&nbsp;
+        </td>
+	</tr>
+	<tr>
+		<td>
+			Number of users that was came in last 1 month: 
+ 			<div class="divwidth"><%= @onemonth %></div>
+			
+		</td>
+	</tr>
+	<tr>
+        <td>
+        	&nbsp;
+        </td>
+	</tr>
+	<tr>
+		<td>
+			Number of users that was came in last 6 month: 
+			<div class="divwidth"><%= @sixmonth %></div>
+		</td>
+	</tr>
+	<tr>
+        <td>
+        	&nbsp;
+        </td>
+	</tr>
+	<tr>
+		<td>
+			Number of users that was came in last 1 year: 
+			<div class="divwidth"><%= @oneyear %></div>
+		</td>
+	</tr>
+</table>
+<table width="80%">
+    <tr>
+        <td style="font-size: x-large; color: #212121; text-align:center;" height="35px;">
+            <div class="button">
+                <%= link_to "Back", "/default", { :class => "buttonBack"} %>
+            </div>
+        </td>            
+    </tr>
+</table>
