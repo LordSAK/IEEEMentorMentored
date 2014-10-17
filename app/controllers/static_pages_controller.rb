@@ -51,10 +51,10 @@ class StaticPagesController < ApplicationController
     if invites.include? ";"
       emails=invites.split ";"
       emails. each do |email|
-        UserMailer.invite_message(email,current_user).deliver
+#        UserMailer.invite_message(email,current_user).deliver
       end
     else
-      UserMailer.invite_message(invites,current_user).deliver
+#      UserMailer.invite_message(invites,current_user).deliver
     end
     redirect_to '/default'
   end
