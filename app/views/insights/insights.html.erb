@@ -4,7 +4,7 @@
 <table width="60%" style="margin: 0px auto;">
 	<tr>
 		<td>
-			Total users: <div class="divwidth" align="right"><%= @last %></div>
+			Total users joined: <div class="divwidth" align="right"><%= @last %></div>
 		</td>
 	</tr>
 	<tr>
@@ -14,7 +14,7 @@
 	</tr>
 	<tr>
 		<td>
-			Number of current users: 
+			Active users: 
 			<div class="divwidth">
 			<%= @userall %></div>
 		</td>
@@ -26,7 +26,7 @@
 	</tr>
 	<tr>
 		<td>
-			Number of users that are gone from here:
+			Users left:
 			<div class="divwidth"><%= @deleteuser %></div>
 		</td>
 	</tr>
@@ -37,7 +37,7 @@
 	</tr>
 	<tr>
 		<td>
-			Percentage of current users: 
+			% of active users: 
 			<div class="divwidth"><%= number_with_precision(@per_current_user, :precision => 3) %>%</div>
 		</td>
 	</tr>
@@ -48,7 +48,7 @@
 	</tr>
 	<tr>
 		<td>
-			Percentage of users that are gone from here:
+			% of users left:
 			<div class="divwidth"><%= number_with_precision(@per_delete_user, :precision => 3) %>%</div>
 		</td>
 	</tr>
@@ -59,7 +59,7 @@
 	</tr>
 	<tr>
 		<td>
-			Number of users that was came in last 24 hours: 
+			Users joined in last 24 hours: 
 			<div class="divwidth"><%= @twentyfourhours %></div>
 		</td>
 	</tr>
@@ -70,7 +70,7 @@
 	</tr>
 	<tr>
 		<td>
-			Number of users that was came in last 7 days: 
+			Users joined in last 7 days: 
 			<div class="divwidth"><%= @lastsevendays %>
 			</div>	
 		</td>
@@ -82,7 +82,7 @@
 	</tr>
 	<tr>
 		<td>
-			Number of users that was came in last 1 month: 
+			Users joined in last 1 month: 
  			<div class="divwidth"><%= @onemonth %></div>
 			
 		</td>
@@ -94,7 +94,7 @@
 	</tr>
 	<tr>
 		<td>
-			Number of users that was came in last 6 month: 
+			Users joined in last 6 month: 
 			<div class="divwidth"><%= @sixmonth %></div>
 		</td>
 	</tr>
@@ -105,7 +105,7 @@
 	</tr>
 	<tr>
 		<td>
-			Number of users that was came in last 1 year: 
+			Users joined in last 1 year: 
 			<div class="divwidth"><%= @oneyear %></div>
 		</td>
 	</tr>
