@@ -779,21 +779,21 @@
         </tr>
     </table>
 <% else %>
-    <table width="80%" style="margin: 0px auto;">
-        <tr>
-            <td style="font-size: x-large; color: #212121; text-align:center;" height="35px;">
-                <div class="button">
-                    <%= link_to "Back", "/default", { :class => "buttonBack"} %>
-                    
-                </div>
-            </td>
-        </tr>
+    <table border width="80%" align="center">
         <tr>
             <td style="font-size: x-large; color: #212121; margin-right:10px;text-align:center;" height="35px;">
                 <div class="button" style="">
                     <input type="submit" class = "buttonSearch" value= 'Update'>
                 </div>
             </td>
+        </tr>
+        <tr>
+            <td style="font-size: x-large; color: #212121; text-align:center;" height="35px;">
+                <div class="button">
+                    <%= link_to "Back", "/default", { :class => "buttonBack"} %>
+                    
+                </div>
+            </td>            
         </tr>
     </table>
 <% end %>
