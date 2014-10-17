@@ -47,15 +47,20 @@
             <table style="color:white;">
                 <% user_education = Education.where('"UserID" = ? ',u.RequestFrom) %>
                 <% user_education.each do |e| %>
-                <tr>
-                    <td>
-                        <%=  e.SchoolName %>
-                    </td>
-                    <td></td>
-                    <td>
-                        &nbsp;class of <%=  e.SchoolTo  %>
-                    </td>
-                </tr>
+
+                    <% @univ=University.where("id = ?",e.UniversityID) %>
+                    <% @univ.each do |u| %>
+                        <table style="color:white;">
+                            <tr>
+                                <td>
+                                    <%= u.University %>
+                                </td>
+                                <td>
+                                    &nbsp;&nbsp;Class of <%= user_edu.SchoolFrom %>
+                                </td>
+                            </tr>
+                        </table>
+                    <% end %>    
                 <% end %>
             </table>
             <hr>

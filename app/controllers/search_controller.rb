@@ -3,7 +3,7 @@ class SearchController < ApplicationController
      @userrequest = Userrequest.new( :RequestFrom => current_user.id, :RequestTo => params[:id] , :IsApproved=> "0", :SkillType => "" )
      @userrequest.save
      print "\n\n\n\n\n Delivering package"
-     UserMailer.request_sent(params[:id]).deliver
+     #UserMailer.request_sent(params[:id]).deliver
      print "\n\n\n\n package delivered"
      redirect_to '/searching'
   end
