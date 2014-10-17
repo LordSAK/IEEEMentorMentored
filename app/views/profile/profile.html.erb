@@ -22,6 +22,7 @@
                 <% name=@user.First_Name %>
                 <% if !@user.Last_Name.blank? %>
                   <% name+= " " +@user.Last_Name %>
+                <% end %>
                 <%= name%>
             <% end %>
         </td>
