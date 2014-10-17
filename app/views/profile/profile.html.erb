@@ -19,7 +19,10 @@
                     <%= @user.AlternateName %>
                 <% end %>
             <% elsif @user.Account == "normal" %>
-                <%= @user.First_Name + " " + @user.Last_Name %>
+                <% name=@user.First_Name %>
+                <% if !@user.Last_Name.blank? %>
+                  <% name+= " " +@user.Last_Name %>
+                <%= name%>
             <% end %>
         </td>
         <td width="60%" style="background-color:#00BFFF;font-size: large">
