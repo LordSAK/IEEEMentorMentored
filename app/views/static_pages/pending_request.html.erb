@@ -50,16 +50,16 @@
 
                     <% @univ=University.where("id = ?",e.UniversityID) %>
                     <% @univ.each do |u| %>
-                        <table style="color:white;">
+                        <!-- <table style="color:white;"> -->
                             <tr>
                                 <td>
                                     <%= u.University %>
                                 </td>
                                 <td>
-                                    &nbsp;&nbsp;Class of <%= user_edu.SchoolFrom %>
+                                    &nbsp;&nbsp;Class of <%= e.SchoolFrom %>
                                 </td>
                             </tr>
-                        </table>
+                        <!--</table>-->
                     <% end %>    
                 <% end %>
             </table>
