@@ -137,7 +137,11 @@
                     <%end %>
                   <% elsif uzr.Account == "normal" %>
                     <a style="color:blue;" href = 'profile?id=<%= uzr.id %>'>
-                      <%= uzr.First_Name + " " + uzr.Last_Name %>
+                       <% name=uzr.First_Name %>
+                <% if !uzr.Last_Name.blank? %>
+                  <% name+= " " +uzr.Last_Name %>
+                <% end %> 
+                      <%= name %>
                     </a>
                   <% end %>
                 </div>
@@ -171,7 +175,11 @@
                   <%end %>
                 <% elsif user.Account == "normal" %>
                   <a style="color:blue;" href = 'profile?id=<%= user.id %>'>
-                    <%= user.First_Name + " " + user.Last_Name %>
+                     <% name=user.First_Name %>
+                <% if !user.Last_Name.blank? %>
+                  <% name+= " " +user.Last_Name %>
+                <% end %> 
+                    <%= name %>
                   </a>
                 <% end %>
               </div>

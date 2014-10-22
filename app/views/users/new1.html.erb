@@ -73,8 +73,7 @@
     <tr height="40px">
       <td width="45%" align="center" style=" color: #212121;" >
         <font  style="font-size:large" >
-          Interest Area
-        </font>
+          Interest Area<font class="inline" style="font-size:large;color:red">*</font></font>
         &nbsp;&nbsp;
         <%= f.select(:interest,options_from_collection_for_select(@InterestAreas, "id", "InterestArea"), :include_blank => true,:id => "DDL_Students") %>
       </td>

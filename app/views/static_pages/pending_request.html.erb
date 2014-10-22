@@ -8,7 +8,11 @@
     <tr>
         <% username = User.find(u.RequestFrom) %>
         <td width="30%" style="background-color: #ccdbe0;" class="style1">
-                        <%= f.label(:username, username.First_Name + " " + username.Last_Name,    :style => "color:blue;" ) %>
+             <% name=username.First_Name %>
+                <% if !username.Last_Name.blank? %>
+                  <% name+= " " +username.Last_Name %>
+                <% end %> 
+                        <%= f.label(:username, name,    :style => "color:blue;" ) %>
         </td>
         <td width="70%" style="background-color:#33b5e5;">
             <table style="color:white;">
